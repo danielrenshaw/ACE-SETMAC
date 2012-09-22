@@ -1,6 +1,5 @@
 *.class
 build/
-dist/
 nbproject/private/
 *.log
 *.log.*
