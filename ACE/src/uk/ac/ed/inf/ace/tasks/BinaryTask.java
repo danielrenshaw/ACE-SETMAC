@@ -39,12 +39,12 @@ public abstract class BinaryTask<E extends Engine<?, ?>, C extends uk.ac.ed.inf.
     super(engine, config);
     this.trueLabel = parseConfigLabel.apply(config.getTrueLabel());
   }
-  
+
   @Override
   public Object parseLabel(String label) {
     return Boolean.parseBoolean(label);
   }
-  
+
   @Override
   public Set<Object> getLabels() {
     return labels;

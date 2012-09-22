@@ -61,7 +61,6 @@ public class SparseMatrix<K, V> extends HashMap<List<K>, V> {
   public void putAll(Map<? extends List<K>, ? extends V> m) {
     Preconditions.checkState(Iterables.all(m.keySet(),
         new Predicate<List<K>>() {
-
           @Override
           public boolean apply(List<K> keys) {
             return keys.size() == dimensions;

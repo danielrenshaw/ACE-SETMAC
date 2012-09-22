@@ -37,7 +37,6 @@ public class PreparedStatements extends InstrumentedCache<Supplier<String>, Prep
     super("PreparedStatements",
         CacheBuilder.newBuilder().removalListener(
         new RemovalListener<Supplier<String>, PreparedStatement>() {
-
           @Override
           public void onRemoval(
               RemovalNotification<Supplier<String>, PreparedStatement> notification) {
@@ -49,7 +48,6 @@ public class PreparedStatements extends InstrumentedCache<Supplier<String>, Prep
           }
         }).concurrencyLevel(1).build(
         new CacheLoader<Supplier<String>, PreparedStatement>() {
-
           @Override
           public PreparedStatement load(Supplier<String> sqlSupplier) throws Exception {
             database.open();

@@ -40,6 +40,6 @@ public interface Evaluator extends Iterable<Result> {
   double getFScore();
 
   double getSpecificity();
-  
+
   double getNegativePredictiveValue();
 }

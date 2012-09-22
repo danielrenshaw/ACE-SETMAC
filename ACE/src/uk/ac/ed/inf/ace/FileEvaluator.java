@@ -40,35 +40,25 @@ public abstract class FileEvaluator implements Evaluator {
       Constructor<T> constructor) throws Exception {
     Task task = experiment.getTask();
     ConfusionMatrix confusionMatrix = new ConfusionMatrix();
-    FileReader fileReader = null;
-    BufferedReader bufferedReader = null;
 
-    try {
-      fileReader = new FileReader(file);
-      bufferedReader = new BufferedReader(fileReader);
-      String line = bufferedReader.readLine();
-      String[] parts = line.split(",");
-      String[] predictedLabels = new String[parts.length - 1];
+    try (FileReader fileReader = new FileReader(file)) {
+      try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        String line = bufferedReader.readLine();
+        String[] parts = line.split(",");
+        String[] predictedLabels = new String[parts.length - 1];
 
-      for (int index = 0; index < predictedLabels.length; index++) {
-        predictedLabels[index] = parts[index + 1];
-      }
-
-      while ((line = bufferedReader.readLine()) != null) {
-        parts = line.split(",");
-
-        for (int index = 1; index < parts.length; index++) {
-          confusionMatrix.add(new Result(task.parseLabel(parts[0]),
-              task.parseLabel(predictedLabels[index - 1]), Integer.parseInt(parts[index])));
+        for (int index = 0; index < predictedLabels.length; index++) {
+          predictedLabels[index] = parts[index + 1];
         }
-      }
-    } finally {
-      if (bufferedReader != null) {
-        bufferedReader.close();
-      }
 
-      if (fileReader != null) {
-        fileReader.close();
+        while ((line = bufferedReader.readLine()) != null) {
+          parts = line.split(",");
+
+          for (int index = 1; index < parts.length; index++) {
+            confusionMatrix.add(new Result(task.parseLabel(parts[0]),
+                task.parseLabel(predictedLabels[index - 1]), Integer.parseInt(parts[index])));
+          }
+        }
       }
     }
 

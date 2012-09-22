@@ -41,7 +41,8 @@ public class DataSet extends DataSetBase<SimpleEngine, uk.ac.ed.inf.ace.config.v
 
   @Override
   protected Iterator<String> getDocumentIds(boolean forTest, Random random) throws Exception {
-    PreparedStatement statement = getEngine().getEnvironment().getDatabase().getPreparedStatements().get(getDocumentIdsSqlSupplier);
+    PreparedStatement statement = getEngine().getEnvironment().getDatabase().getPreparedStatements()
+        .get(getDocumentIdsSqlSupplier);
     return new ScalarResultSetIterator<>(statement.executeQuery());
   }
 }

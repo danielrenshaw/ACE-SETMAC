@@ -210,7 +210,8 @@ public class DB {
     String[] parts = documentId.split("-");
     int siteId = Integer.parseInt(parts[0]);
     int questionId = Integer.parseInt(parts[1]);
-    PreparedStatement statement = database.getPreparedStatements().get(getDocumentDetailsSqlSupplier);
+    PreparedStatement statement = database.getPreparedStatements().get(
+        getDocumentDetailsSqlSupplier);
 
     for (int index = 1; index <= 8; index += 2) {
       statement.setInt(index, questionId);

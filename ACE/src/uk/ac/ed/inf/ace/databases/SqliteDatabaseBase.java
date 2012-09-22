@@ -24,6 +24,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.logging.Level;
@@ -39,7 +40,8 @@ import uk.ac.ed.inf.ace.utils.PreparedStatements;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public abstract class SqliteDatabaseBase<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.SqliteDatabaseBase> extends DatabaseBase<E, C> {
+public abstract class SqliteDatabaseBase<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.SqliteDatabaseBase>
+    extends DatabaseBase<E, C> {
 
   private static final Logger LOGGER = Logger.getLogger(SqliteDatabaseBase.class.getName());
   private final File dbFile;
@@ -58,11 +60,17 @@ public abstract class SqliteDatabaseBase<E extends Engine<?, ?>, C extends uk.ac
   }
 
   @Override
-  public void close() throws Exception {
+  public void close() {
     if (connection != null) {
       LOGGER.info("Closing database");
       preparedStatements.invalidateAll();
-      connection.close();
+
+      try {
+        connection.close();
+      } catch (SQLException exception) {
+        throw new RuntimeException(exception);
+      }
+
       connection = null;
     }
   }
@@ -88,43 +96,28 @@ public abstract class SqliteDatabaseBase<E extends Engine<?, ?>, C extends uk.ac
   private void build() throws Exception {
     LOGGER.log(Level.INFO, "Creating database structure");
     Statement statement = connection.createStatement();
-    FileInputStream fileInputStream = null;
-    InputStreamReader inputStreamReader = null;
-    BufferedReader bufferedReader = null;
 
-    try {
-      fileInputStream = new FileInputStream(ddlFile);
-      inputStreamReader = new InputStreamReader(fileInputStream,
-          uk.ac.ed.inf.ace.utils.Constants.UTF8_CHARSET);
-      bufferedReader = new BufferedReader(inputStreamReader);
+    try (FileInputStream fileInputStream = new FileInputStream(ddlFile)) {
+      try (InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream,
+              uk.ac.ed.inf.ace.utils.Constants.UTF8_CHARSET)) {
+        try (BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+          StringBuilder stringBuilder = new StringBuilder();
+          String line;
 
-      StringBuilder stringBuilder = new StringBuilder();
-      String line;
+          while ((line = bufferedReader.readLine()) != null) {
+            if (line.equalsIgnoreCase("GO")) {
+              String sql = stringBuilder.toString().trim();
 
-      while ((line = bufferedReader.readLine()) != null) {
-        if (line.equalsIgnoreCase("GO")) {
-          String sql = stringBuilder.toString().trim();
+              if (!sql.isEmpty()) {
+                statement.executeUpdate(stringBuilder.toString());
+              }
 
-          if (!sql.isEmpty()) {
-            statement.executeUpdate(stringBuilder.toString());
+              stringBuilder.setLength(0);
+            } else if (!line.trim().startsWith("--")) {
+              stringBuilder.append(line);
+            }
           }
-
-          stringBuilder.setLength(0);
-        } else if (!line.trim().startsWith("--")) {
-          stringBuilder.append(line);
         }
-      }
-    } finally {
-      if (bufferedReader != null) {
-        bufferedReader.close();
-      }
-
-      if (inputStreamReader != null) {
-        inputStreamReader.close();
-      }
-
-      if (fileInputStream != null) {
-        fileInputStream.close();
       }
     }
   }

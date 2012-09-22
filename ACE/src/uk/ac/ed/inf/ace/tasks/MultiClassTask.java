@@ -25,7 +25,8 @@ import uk.ac.ed.inf.ace.*;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public abstract class MultiClassTask<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.MultiClassTaskBase> extends TaskBase<E, C> {
+public abstract class MultiClassTask<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.MultiClassTaskBase>
+    extends TaskBase<E, C> {
 
   private final Set<Object> labels;
   private final Function<String, Object> parseConfigLabel;
@@ -33,9 +34,10 @@ public abstract class MultiClassTask<E extends Engine<?, ?>, C extends uk.ac.ed.
   protected MultiClassTask(E engine, C config, Function<String, Object> parseConfigLabel) {
     super(engine, config);
     this.parseConfigLabel = parseConfigLabel;
-    this.labels = ImmutableSet.<Object>copyOf(Lists.transform(config.getLabels(), parseConfigLabel));
+    this.labels = ImmutableSet.<Object>copyOf(Lists.transform(config.getLabels(),
+        parseConfigLabel));
   }
-  
+
   @Override
   public Object parseLabel(String label) {
     return parseConfigLabel.apply(label);

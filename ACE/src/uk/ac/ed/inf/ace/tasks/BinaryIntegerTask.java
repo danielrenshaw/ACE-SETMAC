@@ -22,7 +22,9 @@ import uk.ac.ed.inf.ace.utils.Utilities;
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class BinaryIntegerTask extends BinaryTask<Engine<?, ?>, uk.ac.ed.inf.ace.config.v1.BinaryIntegerTask> {
-  public BinaryIntegerTask(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.BinaryIntegerTask config) {
+
+  public BinaryIntegerTask(Engine<?, ?> engine,
+      uk.ac.ed.inf.ace.config.v1.BinaryIntegerTask config) {
     super(engine, config, Utilities.PARSE_INTEGER);
   }
 }

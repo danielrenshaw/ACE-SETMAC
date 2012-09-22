@@ -30,6 +30,7 @@ import weka.core.Instances;
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class Classifier extends WekaClassifier<SimpleEngine, uk.ac.ed.inf.ace.config.v1.WekaClassifier> {
+
   public Classifier(SimpleEngine engine, uk.ac.ed.inf.ace.config.v1.WekaClassifier config) {
     super(engine, config);
   }
@@ -38,11 +39,11 @@ public class Classifier extends WekaClassifier<SimpleEngine, uk.ac.ed.inf.ace.co
   protected Instances constructInstances() {
     ArrayList<Attribute> attributes = Lists.newArrayList();
     attributes.add(new Attribute("IsSpam", ImmutableList.of("true", "false")));
-    
+
     for (int index = 0; index < 57; index++) {
       attributes.add(new Attribute("Attribute" + index));
     }
-    
+
     Instances instances = new Instances("Data", attributes, 1);
     instances.setClassIndex(0);
     return instances;
@@ -51,8 +52,8 @@ public class Classifier extends WekaClassifier<SimpleEngine, uk.ac.ed.inf.ace.co
   @Override
   protected Instance constructInstance(ReadableDocument document) {
     Instance instance = new DenseInstance(58);
-    double[] values = (double[])document.getContent();
-    
+    double[] values = (double[]) document.getContent();
+
     for (int index = 0; index < values.length; index++) {
       instance.setValue(index + 1, values[index]);
     }

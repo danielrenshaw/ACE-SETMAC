@@ -37,7 +37,6 @@ public class BinaryEvaluator extends FileEvaluator {
 
   public static BinaryEvaluator read(Experiment experiment, File file) throws Exception {
     return BinaryEvaluator.read(experiment, file, new Constructor<BinaryEvaluator>() {
-
       @Override
       public BinaryEvaluator construct(Experiment experiment, ConfusionMatrix confusionMatrix) {
         return new BinaryEvaluator(experiment, confusionMatrix);

@@ -15,8 +15,6 @@
  */
 package uk.ac.ed.inf.ace;
 
-import uk.ac.ed.inf.ace.utils.DocumentCacheQuery;
-
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */

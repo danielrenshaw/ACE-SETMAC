@@ -315,7 +315,8 @@ public class InflaterPreparedStatement implements PreparedStatement {
   }
 
   @Override
-  public void setObject(int parameterIndex, Object x, int targetSqlType, int scaleOrLength) throws SQLException {
+  public void setObject(int parameterIndex, Object x, int targetSqlType, int scaleOrLength)
+      throws SQLException {
     delegate.setObject(parameterIndex, x, targetSqlType, scaleOrLength);
   }
 
@@ -365,7 +366,8 @@ public class InflaterPreparedStatement implements PreparedStatement {
   }
 
   @Override
-  public void setNCharacterStream(int parameterIndex, Reader value, long length) throws SQLException {
+  public void setNCharacterStream(int parameterIndex, Reader value, long length)
+      throws SQLException {
     delegate.setNCharacterStream(parameterIndex, value, length);
   }
 
@@ -420,12 +422,14 @@ public class InflaterPreparedStatement implements PreparedStatement {
   }
 
   @Override
-  public void setCharacterStream(int parameterIndex, Reader reader, long length) throws SQLException {
+  public void setCharacterStream(int parameterIndex, Reader reader, long length)
+      throws SQLException {
     delegate.setCharacterStream(parameterIndex, reader, length);
   }
 
   @Override
-  public void setCharacterStream(int parameterIndex, Reader reader, int length) throws SQLException {
+  public void setCharacterStream(int parameterIndex, Reader reader, int length)
+      throws SQLException {
     delegate.setCharacterStream(parameterIndex, reader, length);
   }
 
@@ -450,7 +454,8 @@ public class InflaterPreparedStatement implements PreparedStatement {
   }
 
   @Override
-  public void setBlob(int parameterIndex, InputStream inputStream, long length) throws SQLException {
+  public void setBlob(int parameterIndex, InputStream inputStream, long length)
+      throws SQLException {
     delegate.setBlob(parameterIndex, inputStream, length);
   }
 

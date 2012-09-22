@@ -17,7 +17,6 @@ package uk.ac.ed.inf.ace.utils;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import uk.ac.ed.inf.ace.Environment;
 import uk.ac.ed.inf.ace.Processor;
@@ -27,9 +26,10 @@ import uk.ac.ed.inf.ace.ReadableDocument;
 /**
  * Provides a mechanism for storing processed documents for future use, avoiding the need to reload
  * and reprocess documents. Items are evicted using a least-recently-used policy once the maximum
- * capacity is reached.
- * Cache statistics are emitted to the log on every 10,000'th request. The letters C-H-M-E-S-F refer
- * to (request) Count, Hits, Misses, Evictions, (load) Successes, (load) Failures.
+ * capacity is reached. Cache statistics are emitted to the log on every 10,000'th request. The
+ * letters C-H-M-E-S-F refer to (request) Count, Hits, Misses, Evictions, (load) Successes, (load)
+ * Failures.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class DocumentCache extends InstrumentedCache<DocumentCacheQuery, ReadableDocument> {
@@ -47,14 +47,14 @@ public class DocumentCache extends InstrumentedCache<DocumentCacheQuery, Readabl
           return null;
         }
       }
-      
+
       return query.getReadableDocument(document);
     }
   }
 
   /**
    * @param environment The environment from which the degree of concurrency and cache capacity will
-   *     be determined.
+   * be determined.
    */
   public DocumentCache(Environment<?> environment) {
     super("Documents",

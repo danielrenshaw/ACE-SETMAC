@@ -26,7 +26,6 @@ public class HardCache extends InstrumentedCache<SupplierEx<?>, Object> {
   public HardCache(String name) {
     super(name, CacheBuilder.newBuilder().concurrencyLevel(1).build(
         new CacheLoader<SupplierEx<?>, Object>() {
-
           @Override
           public Object load(SupplierEx<?> key) throws Exception {
             return key.get();

@@ -126,7 +126,8 @@ public class DMR extends ConfiguredMalletClassifierBase<uk.ac.ed.inf.setmac.conf
     }
 
     @Override
-    public Object classify(ReadableDocument document, Object actualLabel, Task task) throws Exception {
+    public Object classify(ReadableDocument document, Object actualLabel, Task task)
+        throws Exception {
       Builder<Object, Double> distancesBuilder = ImmutableMap.builder();
 
       for (Object label : labels) {

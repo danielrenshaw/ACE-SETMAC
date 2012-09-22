@@ -15,6 +15,7 @@
  */
 package uk.ac.ed.inf.ace.cli;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.MessageFormat;
@@ -41,19 +42,16 @@ public class LogFormatter extends Formatter {
     }
 
     if (throwable != null) {
-      StringWriter stringWriter = null;
-      PrintWriter printWriter = null;
-
       try {
-        stringWriter = new StringWriter();
-        printWriter = new PrintWriter(stringWriter);
-        printWriter.print("\n");
-        throwable.printStackTrace(printWriter);
-        message += stringWriter.toString();
-      } finally {
-        if (printWriter != null) {
-          printWriter.close();
+        try (StringWriter stringWriter = new StringWriter()) {
+          try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
+            printWriter.print("\n");
+            throwable.printStackTrace(printWriter);
+            message += stringWriter.toString();
+          }
         }
+      } catch (IOException exception) {
+        throw new RuntimeException(exception);
       }
     }
 

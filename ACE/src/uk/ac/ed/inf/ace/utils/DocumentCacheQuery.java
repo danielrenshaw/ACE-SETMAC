@@ -24,6 +24,7 @@ import uk.ac.ed.inf.ace.ReadableDocument;
 /**
  * Represents a query for a particular document from a document cache. Provides all of the
  * information needed to source the document if it is not present in the cache.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class DocumentCacheQuery {
@@ -81,7 +82,7 @@ public class DocumentCacheQuery {
   public int hashCode() {
     return key.hashCode();
   }
-  
+
   public ReadableDocument getReadableDocument(ReadWriteableDocument document) {
     return new ReadableDocument(document);
   }

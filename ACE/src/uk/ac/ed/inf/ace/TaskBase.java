@@ -20,13 +20,14 @@ package uk.ac.ed.inf.ace;
  */
 public abstract class TaskBase<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.TaskBase>
     extends TypeableBase<E, C> implements Task {
+
   private final String labelPropertyKey;
 
   protected TaskBase(E engine, C config) {
     super(engine, config);
     this.labelPropertyKey = config.getLabelPropertyKey();
   }
-  
+
   protected String getLabelPropertyKey() {
     return labelPropertyKey;
   }

@@ -179,7 +179,8 @@ public class LDA extends ConfiguredMalletClassifierBase<uk.ac.ed.inf.setmac.conf
               + getClassifierType());
       }
 
-      return new LdaMalletModel(topicModels, instanceModelDistances, topicModelClassifier, getPipe());
+      return new LdaMalletModel(topicModels, instanceModelDistances, topicModelClassifier,
+          getPipe());
     }
   }
 
@@ -214,17 +215,15 @@ public class LDA extends ConfiguredMalletClassifierBase<uk.ac.ed.inf.setmac.conf
       for (Entry<Object, ParallelTopicModel> entry : this.topicModels.entrySet()) {
         Object label = entry.getKey();
         ParallelTopicModel topicModel = entry.getValue();
-        PrintWriter printWriter = new PrintWriter(new File(outputDirectory,
-            outputFilePrefix + label + "-TopicReport.xml"));
 
-        try {
+        try (PrintWriter printWriter = new PrintWriter(new File(outputDirectory,
+                outputFilePrefix + label + "-TopicReport.xml"))) {
           topicModel.topicXMLReport(printWriter, getTopWords());
-          printWriter.close();
-          printWriter = new PrintWriter(new File(outputDirectory,
-              outputFilePrefix + label + "-TopicPhraseReport.xml"));
+        }
+
+        try (PrintWriter printWriter = new PrintWriter(new File(outputDirectory,
+                outputFilePrefix + label + "-TopicPhraseReport.xml"))) {
           topicModel.topicPhraseXMLReport(printWriter, getTopWords());
-        } finally {
-          printWriter.close();
         }
       }
     }

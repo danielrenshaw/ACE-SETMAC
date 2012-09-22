@@ -15,6 +15,7 @@
  */
 package uk.ac.ed.inf.ace;
 
+import java.io.Closeable;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import uk.ac.ed.inf.ace.utils.PreparedStatements;
@@ -22,13 +23,11 @@ import uk.ac.ed.inf.ace.utils.PreparedStatements;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public interface Database {
+public interface Database extends Closeable {
 
   void open(RandomSource randomSource, boolean rebuild, boolean generateTestData) throws Exception;
 
   void open() throws Exception;
-
-  void close() throws Exception;
 
   Statement createStatement() throws Exception;
 

@@ -22,8 +22,8 @@ import java.util.Set;
 
 /**
  * Provides a means of encoding (mapping string tokens to identifiers) and decoding (mapping
- * identifiers to string tokens) document content.
- * Instances of this class are thread safe.
+ * identifiers to string tokens) document content. Instances of this class are thread safe.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class Dictionary {
@@ -35,8 +35,8 @@ public class Dictionary {
   /**
    * If the token has been seen by the dictionary previously, returns the identifier it is already
    * associated with. If it's a new token, assigns, records, and returns a new identifier. Null
-   * tokens are not supported.
-   * Computational complexity: O(1).
+   * tokens are not supported. Computational complexity: O(1).
+   *
    * @param token The token to be mapped to an identifier.
    * @return The identifier of the token.
    */
@@ -55,15 +55,15 @@ public class Dictionary {
 
   /**
    * If the specified identifier is known to the dictionary, returns the token it is associated
-   * with, otherwise returns {@code null}.
-   * Computational complexity: O(1).
+   * with, otherwise returns {@code null}. Computational complexity: O(1).
+   *
    * @param id The identifier to be mapped to a token.
    * @return The token associated with the identifier if known, otherwise {@code null}.
    */
   public synchronized String get(int id) {
     return idToToken.get(id);
   }
-  
+
   /**
    * @return The number of tokens mapped to identifiers by this dictionary.
    */
@@ -71,14 +71,14 @@ public class Dictionary {
     assert tokenToId.size() == idToToken.size();
     return tokenToId.size();
   }
-  
+
   /**
    * @return A view of the tokens mapped by this dictionary.
    */
   public synchronized Set<String> tokens() {
     return tokenToId.keySet();
   }
-  
+
   /**
    * @return A view of the identifiers mapped by this dictionary.
    */

@@ -44,7 +44,8 @@ public class Flagged extends DocTypeBase<Engine, uk.ac.ed.inf.setmac.config.v1.F
   public ReadWriteableDocument getDocument(String documentId) throws Exception {
     ReadWriteableDocument document;
 
-    try (ResultSet resultSet = DB.getDocumentDetails(getEngine().getEnvironment().getDatabase(), documentId)) {
+    try (ResultSet resultSet = DB.getDocumentDetails(getEngine().getEnvironment().getDatabase(),
+            documentId)) {
       uk.ac.ed.inf.setmac.config.v1.Flagged config = getConfig();
       StringBuilder content = new StringBuilder();
       int state = -1;

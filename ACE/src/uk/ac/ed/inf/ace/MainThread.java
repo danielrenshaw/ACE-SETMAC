@@ -64,15 +64,9 @@ public class MainThread extends Thread {
   public void run() {
     try {
       RandomSource randomSource = new RandomSource(engine.getEnvironment().getRandomSeed());
-      Database initialDatabase = null;
 
-      try {
-        initialDatabase = engine.getEnvironment().getDatabase();
+      try (Database initialDatabase = engine.getEnvironment().getDatabase()) {
         initialDatabase.open(randomSource, rebuildDatabase, generateTestData);
-      } finally {
-        if (initialDatabase != null) {
-          initialDatabase.close();
-        }
       }
 
       if (databaseQueryMode) {

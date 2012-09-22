@@ -56,7 +56,8 @@ public class Randomifier extends ClassifierBase<Engine<?, ?>, uk.ac.ed.inf.ace.c
     }
 
     @Override
-    public Object classify(ReadableDocument document, Object actualLabel, Task task) throws Exception {
+    public Object classify(ReadableDocument document, Object actualLabel, Task task)
+        throws Exception {
       return labels[random.nextInt(labels.length)];
     }
 

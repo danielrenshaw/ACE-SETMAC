@@ -40,7 +40,6 @@ public class CleanTokens extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.co
         Iterators.filter(
         Iterators.transform(tokens,
         new Function<String, String>() {
-
           @Override
           public String apply(String input) {
             if (input == null) {
@@ -51,7 +50,6 @@ public class CleanTokens extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.co
           }
         }),
         new Predicate<String>() {
-
           @Override
           public boolean apply(String input) {
             return !input.isEmpty();

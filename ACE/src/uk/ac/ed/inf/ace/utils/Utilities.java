@@ -49,7 +49,6 @@ public class Utilities {
     }
 
     return Iterables.transform(configs, new Function<JAXBElement<? extends C>, C>() {
-
       @Override
       public C apply(JAXBElement<? extends C> element) {
         return element.getValue();
@@ -96,7 +95,6 @@ public class Utilities {
   private static <E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.Enableable, T extends Named> FunctionEx<C, T> constructDefaultConstructor(
       final E engine, final Class<T> currentType, final Iterable<T> globals) {
     return new FunctionEx<C, T>() {
-
       @Override
       public T apply(C config) throws Exception {
         if (config instanceof uk.ac.ed.inf.ace.config.v1.Reference) {
@@ -108,7 +106,8 @@ public class Utilities {
 
           if (config instanceof uk.ac.ed.inf.ace.config.v1.Typeable) {
             @SuppressWarnings("unchecked")
-            Class<T> typedType = (Class<T>) Class.forName(((uk.ac.ed.inf.ace.config.v1.Typeable) config).getType());
+            Class<T> typedType =
+                (Class<T>) Class.forName(((uk.ac.ed.inf.ace.config.v1.Typeable) config).getType());
             type = typedType;
           } else {
             type = currentType;
@@ -154,7 +153,6 @@ public class Utilities {
       return builder.build();
     }
   }
-
   public static final Function<String, Object> PARSE_INTEGER = new Function<String, Object>() {
     @Override
     public Object apply(String input) {

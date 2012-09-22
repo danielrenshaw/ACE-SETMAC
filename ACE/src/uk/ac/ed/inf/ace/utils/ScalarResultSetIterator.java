@@ -30,6 +30,6 @@ public class ScalarResultSetIterator<T> extends ResultSetIteratorBase<T> {
   @Override
   @SuppressWarnings("unchecked")
   protected T get(ResultSet resultSet) throws SQLException {
-    return (T)resultSet.getObject(1);
+    return (T) resultSet.getObject(1);
   }
 }

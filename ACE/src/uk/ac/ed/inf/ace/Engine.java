@@ -32,7 +32,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
   private boolean stopping;
   private final SupplierEx<Environment<Engine<E, C>>> environmentSupplier =
       new SupplierEx<Environment<Engine<E, C>>>() {
-
         @Override
         public Environment<Engine<E, C>> get() throws Exception {
           return Environment.<Engine<E, C>>getActiveEnvironment(Engine.this, environmentName,
@@ -42,7 +41,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<List<DataSet>> dataSetsSupplier =
       new SupplierEx<List<DataSet>>() {
-
         @Override
         public List<DataSet> get() throws Exception {
           return Utilities.getConfiguredItems(getConfig().getDataSets().getDataSetBase(),
@@ -51,7 +49,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<List<DocType>> docTypesSupplier =
       new SupplierEx<List<DocType>>() {
-
         @Override
         public List<DocType> get() throws Exception {
           return Utilities.getConfiguredItems(getConfig().getDocTypes().getDocTypeBase(),
@@ -60,7 +57,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<List<Classifier>> classifiersSupplier =
       new SupplierEx<List<Classifier>>() {
-
         @Override
         public List<Classifier> get() throws Exception {
           return Utilities.getConfiguredItems(getConfig().getClassifiers().getClassifierBase(),
@@ -69,7 +65,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<List<Task>> tasksSupplier =
       new SupplierEx<List<Task>>() {
-
         @Override
         public List<Task> get() throws Exception {
           return Utilities.getConfiguredItems(getConfig().getTasks().getTaskBase(), Engine.this,
@@ -78,25 +73,23 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<List<Processor>> preCacheProcessorsSupplier =
       new SupplierEx<List<Processor>>() {
-
         @Override
         public List<Processor> get() throws Exception {
-          return Utilities.getConfiguredItems(getConfig().getPreCacheProcessors().getProcessorBase(),
-              Engine.this, Processor.class);
+          return Utilities.getConfiguredItems(
+              getConfig().getPreCacheProcessors().getProcessorBase(), Engine.this, Processor.class);
         }
       };
   private final SupplierEx<List<Processor>> postCacheProcessorsSupplier =
       new SupplierEx<List<Processor>>() {
-
         @Override
         public List<Processor> get() throws Exception {
-          return Utilities.getConfiguredItems(getConfig().getPostCacheProcessors().getProcessorBase(),
-              Engine.this, Processor.class);
+          return Utilities.getConfiguredItems(
+              getConfig().getPostCacheProcessors().getProcessorBase(), Engine.this,
+              Processor.class);
         }
       };
   private final SupplierEx<List<Programme>> programmesSupplier =
       new SupplierEx<List<Programme>>() {
-
         @Override
         public List<Programme> get() throws Exception {
           return Utilities.getConfiguredItems(getConfig().getProgrammes().getProgramme(),
@@ -105,7 +98,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<ThreadPool> threadPoolSupplier =
       new SupplierEx<ThreadPool>() {
-
         @Override
         public ThreadPool get() throws Exception {
           return new ThreadPool(getEnvironment().getThreadPoolSize() + Iterables.size(
@@ -114,7 +106,6 @@ public class Engine<E extends Engine<E, C>, C extends uk.ac.ed.inf.ace.config.v1
       };
   private final SupplierEx<DocumentCache> cacheSupplier =
       new SupplierEx<DocumentCache>() {
-
         @Override
         public DocumentCache get() throws Exception {
           return new DocumentCache(getEnvironment());

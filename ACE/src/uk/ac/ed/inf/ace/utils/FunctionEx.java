@@ -19,6 +19,7 @@ import com.google.common.base.Objects;
 
 /**
  * Based on {@code com.google.common.base.Function} but allows exceptions to be thrown.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public interface FunctionEx<F, T> {
@@ -27,15 +28,13 @@ public interface FunctionEx<F, T> {
    * Returns the result of applying this function to {@code input}. This method is <i>generally
    * expected</i>, but not absolutely required, to have the following properties:
    *
-   * <ul>
-   * <li>Its execution does not cause any observable side effects.
-   * <li>The computation is <i>consistent with equals</i>; that is, {@link Objects#equals
+   * <ul> <li>Its execution does not cause any observable side effects. <li>The computation is
+   * <i>consistent with equals</i>; that is, {@link Objects#equals
    *     Objects.equals}{@code (a, b)} implies that {@code Objects.equals(function.apply(a),
-   *     function.apply(b))}.
-   * </ul>
+   *     function.apply(b))}. </ul>
    *
    * @throws NullPointerException if {@code input} is null and this function does not accept null
-   *     arguments
+   * arguments
    */
   T apply(F input) throws Exception;
 }

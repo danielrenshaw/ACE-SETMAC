@@ -16,6 +16,7 @@
 package uk.ac.ed.inf.ace.classifiers;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Set;
 import uk.ac.ed.inf.ace.ClassifierBase;
 import uk.ac.ed.inf.ace.Engine;
@@ -31,7 +32,8 @@ import weka.core.Instances;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public abstract class WekaClassifier<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.WekaClassifierBase> extends ClassifierBase<E, C> {
+public abstract class WekaClassifier<E extends Engine<?, ?>, C extends uk.ac.ed.inf.ace.config.v1.WekaClassifierBase>
+    extends ClassifierBase<E, C> {
 
   private class WekaTrainer implements Trainer {
 
@@ -53,7 +55,8 @@ public abstract class WekaClassifier<E extends Engine<?, ?>, C extends uk.ac.ed.
 
     @Override
     public Model createModel() throws Exception {
-      weka.classifiers.Classifier classifier = (weka.classifiers.Classifier) Class.forName(getConfig().getWekaType()).newInstance();
+      weka.classifiers.Classifier classifier = (weka.classifiers.Classifier) Class.forName(
+          getConfig().getWekaType()).newInstance();
       classifier.buildClassifier(instances);
       return new WekaModel(instances, classifier);
     }
@@ -70,7 +73,8 @@ public abstract class WekaClassifier<E extends Engine<?, ?>, C extends uk.ac.ed.
     }
 
     @Override
-    public Object classify(ReadableDocument document, Object actualLabel, Task task) throws Exception {
+    public Object classify(ReadableDocument document, Object actualLabel, Task task)
+        throws Exception {
       Instance instance = constructInstance(document);
       instance.setDataset(instances);
       double classId = classifier.classifyInstance(instance);
@@ -79,7 +83,10 @@ public abstract class WekaClassifier<E extends Engine<?, ?>, C extends uk.ac.ed.
 
     @Override
     public void write(File outputDirectory, String outputFilePrefix) throws Exception {
-      // TODO: Implement!
+      try (PrintWriter printWriter = new PrintWriter(new File(outputDirectory,
+              outputFilePrefix + "Model.txt"))) {
+        printWriter.write(classifier.toString());
+      }
     }
   }
 

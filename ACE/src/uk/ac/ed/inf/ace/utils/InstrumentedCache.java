@@ -37,7 +37,6 @@ public abstract class InstrumentedCache<K, V> {
   protected InstrumentedCache(String name, final LoadingCache<K, V> cache) {
     this.name = name;
     this.cache = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<K, V>() {
-
       @Override
       public V load(K key) throws Exception {
         return cache.get(key);
@@ -57,9 +56,9 @@ public abstract class InstrumentedCache<K, V> {
   }
 
   /**
-   * Does the same as {@link InstrumentedCache#get(Object)} but
-   * will wrap any exception in an unchecked {@code RuntimeException}. Avoid using this method
-   * whenever possible.
+   * Does the same as {@link InstrumentedCache#get(Object)} but will wrap any exception in an
+   * unchecked {@code RuntimeException}. Avoid using this method whenever possible.
+   *
    * @param query The details of the document to returned (after loading if required)
    * @return The requested document.
    */

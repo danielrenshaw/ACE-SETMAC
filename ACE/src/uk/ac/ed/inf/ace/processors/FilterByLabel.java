@@ -34,7 +34,6 @@ public class FilterByLabel extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.
   private final HardCache hardCache = new HardCache("FilterByLabel");
   private final SupplierEx<Map<Object, Double>> sampleProbabilitiesSupplier =
       new SupplierEx<Map<Object, Double>>() {
-
         @Override
         public Map<Object, Double> get() throws Exception {
           Builder<Object, Double> rulesBuilder = ImmutableMap.builder();

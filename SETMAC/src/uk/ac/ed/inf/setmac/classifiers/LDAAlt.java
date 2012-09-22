@@ -45,7 +45,8 @@ public class LDAAlt extends MalletClassifierBase<uk.ac.ed.inf.setmac.config.v1.S
 
   private static class SimpleLDAWrapper extends SimpleLDA {
 
-    private SimpleLDAWrapper(LabelAlphabet topicAlphabet, double alphaSum, double beta, Randoms random) {
+    private SimpleLDAWrapper(LabelAlphabet topicAlphabet, double alphaSum, double beta,
+        Randoms random) {
       super(topicAlphabet, alphaSum, beta, random);
     }
 

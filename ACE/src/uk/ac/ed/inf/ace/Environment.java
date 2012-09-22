@@ -35,7 +35,6 @@ public class Environment<E extends Engine<?, ?>>
   private final HardCache hardCache = new HardCache("Environment");
   private final SupplierEx<File> outputDirectorySupplier =
       new SupplierEx<File>() {
-
         @Override
         public File get() throws Exception {
           return new File(getConfig().getOutputPath());
@@ -43,7 +42,6 @@ public class Environment<E extends Engine<?, ?>>
       };
   private final SupplierEx<File> resultsFileSupplier =
       new SupplierEx<File>() {
-
         @Override
         public File get() throws Exception {
           return new File(getOutputDirectory(), "Results.csv");
@@ -51,7 +49,6 @@ public class Environment<E extends Engine<?, ?>>
       };
   private final SupplierEx<DocType> classificationDocTypeSupplier =
       new SupplierEx<DocType>() {
-
         @Override
         public DocType get() throws Exception {
           for (DocType docType : getEngine().getDocTypes()) {
@@ -64,7 +61,6 @@ public class Environment<E extends Engine<?, ?>>
         }
       };
   private final ThreadLocal<Database> database = new ThreadLocal<Database>() {
-
     @Override
     protected Database initialValue() {
       try {
@@ -115,7 +111,7 @@ public class Environment<E extends Engine<?, ?>>
   public File getOutputDirectory() throws Exception {
     return hardCache.get(outputDirectorySupplier);
   }
-  
+
   public File getResultsFile() throws Exception {
     return hardCache.get(resultsFileSupplier);
   }

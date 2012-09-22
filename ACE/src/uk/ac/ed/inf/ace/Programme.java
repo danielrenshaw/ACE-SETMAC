@@ -35,7 +35,6 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
   private final HardCache hardCache = new HardCache("Programme");
   private final SupplierEx<List<DataSet>> dataSetsSupplier =
       new SupplierEx<List<DataSet>>() {
-
         @Override
         public List<DataSet> get() throws Exception {
           uk.ac.ed.inf.ace.config.v1.Programme.DataSets collection = getConfig().getDataSets();
@@ -47,7 +46,6 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<DocType>> docTypesSupplier =
       new SupplierEx<List<DocType>>() {
-
         @Override
         public List<DocType> get() throws Exception {
           uk.ac.ed.inf.ace.config.v1.Programme.DocTypes collection = getConfig().getDocTypes();
@@ -59,10 +57,10 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<Classifier>> classifiersSupplier =
       new SupplierEx<List<Classifier>>() {
-
         @Override
         public List<Classifier> get() throws Exception {
-          uk.ac.ed.inf.ace.config.v1.Programme.Classifiers collection = getConfig().getClassifiers();
+          uk.ac.ed.inf.ace.config.v1.Programme.Classifiers collection =
+              getConfig().getClassifiers();
           List<JAXBElement<? extends uk.ac.ed.inf.ace.config.v1.Enableable>> configs =
               collection == null ? null : collection.getClassifierBaseOrClassifierRef();
           return Utilities.getConfiguredItems(configs, getEngine(), Classifier.class,
@@ -71,7 +69,6 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<Task>> tasksSupplier =
       new SupplierEx<List<Task>>() {
-
         @Override
         public List<Task> get() throws Exception {
           uk.ac.ed.inf.ace.config.v1.Programme.Tasks collection = getConfig().getTasks();
@@ -83,10 +80,10 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<Processor>> preCacheProcessorsSupplier =
       new SupplierEx<List<Processor>>() {
-
         @Override
         public List<Processor> get() throws Exception {
-          uk.ac.ed.inf.ace.config.v1.Programme.PreCacheProcessors collection = getConfig().getPreCacheProcessors();
+          uk.ac.ed.inf.ace.config.v1.Programme.PreCacheProcessors collection =
+              getConfig().getPreCacheProcessors();
           List<JAXBElement<? extends uk.ac.ed.inf.ace.config.v1.Enableable>> configs =
               collection == null ? null : collection.getProcessorBaseOrProcessorRef();
           return Utilities.getConfiguredItems(configs, getEngine(), Processor.class,
@@ -95,10 +92,10 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<Processor>> postCacheProcessorsSupplier =
       new SupplierEx<List<Processor>>() {
-
         @Override
         public List<Processor> get() throws Exception {
-          uk.ac.ed.inf.ace.config.v1.Programme.PostCacheProcessors collection = getConfig().getPostCacheProcessors();
+          uk.ac.ed.inf.ace.config.v1.Programme.PostCacheProcessors collection =
+              getConfig().getPostCacheProcessors();
           List<JAXBElement<? extends uk.ac.ed.inf.ace.config.v1.Enableable>> configs =
               collection == null ? null : collection.getProcessorBaseOrProcessorRef();
           return Utilities.getConfiguredItems(configs, getEngine(), Processor.class,
@@ -107,7 +104,6 @@ public class Programme extends NamedBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v
       };
   private final SupplierEx<List<Experiment>> experimentsSupplier =
       new SupplierEx<List<Experiment>>() {
-
         @Override
         public List<Experiment> get() throws Exception {
           Engine<?, ?> engine = getEngine();

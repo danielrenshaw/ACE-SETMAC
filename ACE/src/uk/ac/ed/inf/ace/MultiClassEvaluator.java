@@ -34,7 +34,6 @@ public class MultiClassEvaluator extends FileEvaluator {
 
   public static MultiClassEvaluator read(Experiment experiment, File file) throws Exception {
     return MultiClassEvaluator.read(experiment, file, new Constructor<MultiClassEvaluator>() {
-
       @Override
       public MultiClassEvaluator construct(Experiment experiment,
           ConfusionMatrix confusionMatrix) {

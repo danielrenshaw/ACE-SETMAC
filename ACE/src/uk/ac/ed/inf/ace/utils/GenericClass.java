@@ -20,6 +20,7 @@ import java.lang.reflect.Type;
 
 /**
  * Uses reflection to obtain a generic {@link java.lang.Class} instance at runtime.
+ *
  * @deprecated No longer used and can be removed if no future is seen for it.
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */

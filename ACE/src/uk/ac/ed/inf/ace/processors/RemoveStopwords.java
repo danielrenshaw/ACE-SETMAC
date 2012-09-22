@@ -68,7 +68,6 @@ public class RemoveStopwords
     document.setContent(
         Iterators.filter(tokens,
         new Predicate<String>() {
-
           @Override
           public boolean apply(String input) {
             return !stopwords.contains(input);

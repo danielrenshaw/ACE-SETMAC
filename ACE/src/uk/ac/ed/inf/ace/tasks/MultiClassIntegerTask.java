@@ -22,7 +22,9 @@ import uk.ac.ed.inf.ace.utils.Utilities;
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class MultiClassIntegerTask extends MultiClassTask<Engine<?, ?>, uk.ac.ed.inf.ace.config.v1.MultiClassIntegerTask> {
-  public MultiClassIntegerTask(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.MultiClassIntegerTask config) {
+
+  public MultiClassIntegerTask(Engine<?, ?> engine,
+      uk.ac.ed.inf.ace.config.v1.MultiClassIntegerTask config) {
     super(engine, config, Utilities.PARSE_INTEGER);
   }
 }

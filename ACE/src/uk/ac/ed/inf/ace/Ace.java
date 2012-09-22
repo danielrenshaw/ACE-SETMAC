@@ -54,10 +54,7 @@ public class Ace {
       System.setErr(outStream);
       LOGGER.info("Starting");
       CommandLine commandLine = getCommandLine(args);
-
       Engine<?, ?> engine = null;
-      InputStreamReader inputStreamReader = null;
-      BufferedReader bufferedReader = null;
 
       try {
         // Load the configuration
@@ -96,16 +93,18 @@ public class Ace {
             commandLine.hasOption(ANALYSIS_ONLY_OPTION));
 
         // Set up a basic REPL
-        inputStreamReader = new InputStreamReader(System.in);
-        bufferedReader = new BufferedReader(inputStreamReader);
+        try (InputStreamReader inputStreamReader = new InputStreamReader(System.in)) {
+          try (BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
-        CommandInterface commandInterface = new CommandInterface(engine);
-        outStream.printPrompt("> ");
-        String command;
+            CommandInterface commandInterface = new CommandInterface(engine);
+            outStream.printPrompt("> ");
+            String command;
 
-        while ((command = bufferedReader.readLine()) != null) {
-          if (commandInterface.execute(command)) {
-            break;
+            while ((command = bufferedReader.readLine()) != null) {
+              if (commandInterface.execute(command)) {
+                break;
+              }
+            }
           }
         }
 
@@ -113,14 +112,6 @@ public class Ace {
       } finally {
         if (engine != null) {
           engine.stop();
-        }
-
-        if (inputStreamReader != null) {
-          inputStreamReader.close();
-        }
-
-        if (bufferedReader != null) {
-          bufferedReader.close();
         }
       }
     } catch (Exception exception) {

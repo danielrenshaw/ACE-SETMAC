@@ -24,10 +24,11 @@ import java.util.Map;
 /**
  * Compresses a set of tokens into a set of identifiers using a {@link Dictionary} and provides
  * access to an iterator that will decompress the identifiers back into tokens. The order of the
- * tokens is not preserved but the quantity of each token is retained.
- * A possible optimization might be possible if consumers of this class could be amended to accept
+ * tokens is not preserved but the quantity of each token is retained. A possible optimization might
+ * be possible if consumers of this class could be amended to accept
  * {@code Map.Entry<String, Integer>} instances instead of requiring every occurrence of each token
  * to be enumerated.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class DictionaryIterable implements Iterable<String> {
@@ -81,6 +82,7 @@ public class DictionaryIterable implements Iterable<String> {
   /**
    * The tokens are compressed immediately. The iterator will be exhausted after this constructor is
    * called.
+   *
    * @param dictionary The dictionary to use for mapping between tokens and identifiers.
    * @param tokens The tokens to be compressed. Null tokens are skipped.
    */
@@ -106,7 +108,7 @@ public class DictionaryIterable implements Iterable<String> {
         temp.put(id, count + 1);
       }
     }
-    
+
     this.counts = ImmutableMap.copyOf(temp);
   }
 

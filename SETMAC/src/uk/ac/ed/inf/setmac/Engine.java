@@ -23,8 +23,7 @@ import uk.ac.ed.inf.ace.utils.Utilities;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public class Engine
-    extends uk.ac.ed.inf.ace.Engine<uk.ac.ed.inf.setmac.Engine, uk.ac.ed.inf.setmac.config.v1.Engine> {
+public class Engine extends uk.ac.ed.inf.ace.Engine<uk.ac.ed.inf.setmac.Engine, uk.ac.ed.inf.setmac.config.v1.Engine> {
 
   private final HardCache hardCache = new HardCache("EngineExt");
   private final SupplierEx<List<Site>> sitesSupplier =

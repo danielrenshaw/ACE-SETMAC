@@ -154,18 +154,15 @@ public class Experiment {
   }
 
   private void writeException(String id, Object actual, Object predicted) throws Exception {
-    FileOutputStream fileOutputStream = new FileOutputStream(new File(outputDirectory,
-        outputFilePrefix + "Misclassifications.txt"), true);
-    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
-
-    try {
-      outputStreamWriter.write(String.format("%s,%s,%s,%s\n", actual, predicted, id,
-          clean(docType.getDocument(id).getContent())));
-    } finally {
-      outputStreamWriter.flush();
-      outputStreamWriter.close();
-      fileOutputStream.flush();
-      fileOutputStream.close();
+    try (FileOutputStream fileOutputStream = new FileOutputStream(new File(outputDirectory,
+            outputFilePrefix + "Misclassifications.txt"), true)) {
+      try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream,
+              "UTF-8")) {
+        outputStreamWriter.write(String.format("%s,%s,%s,%s\n", actual, predicted, id,
+            clean(docType.getDocument(id).getContent())));
+        outputStreamWriter.flush();
+        fileOutputStream.flush();
+      }
     }
   }
 

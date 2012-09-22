@@ -29,13 +29,15 @@ import uk.ac.ed.inf.ace.utils.SupplierEx;
  * @author Daniel
  */
 public class CompressByDictionary extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v1.Processor> {
+
   private final SoftCache softCache;
 
-  public CompressByDictionary(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.Processor config) throws Exception {
+  public CompressByDictionary(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.Processor config)
+      throws Exception {
     super(engine, config);
-    this.softCache = new SoftCache("DataSetDictionaries", getEngine().getEnvironment().getCacheEvictAfterAccess(), 1);
+    this.softCache = new SoftCache("DataSetDictionaries",
+        getEngine().getEnvironment().getCacheEvictAfterAccess(), 1);
   }
-
   private final SupplierEx<Dictionary> dictionarySupplier =
       new SupplierEx<Dictionary>() {
         @Override

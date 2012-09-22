@@ -32,8 +32,7 @@ import uk.ac.ed.inf.setmac.Engine;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public abstract class MalletClassifierBase<C extends uk.ac.ed.inf.ace.config.v1.ClassifierBase>
-    extends ClassifierBase<uk.ac.ed.inf.setmac.Engine, C> {
+public abstract class MalletClassifierBase<C extends uk.ac.ed.inf.ace.config.v1.ClassifierBase> extends ClassifierBase<uk.ac.ed.inf.setmac.Engine, C> {
 
   protected static abstract class MalletTrainerBase implements Trainer {
 
@@ -80,7 +79,8 @@ public abstract class MalletClassifierBase<C extends uk.ac.ed.inf.ace.config.v1.
     protected abstract Object classify(Instance instance) throws Exception;
 
     @Override
-    public Object classify(ReadableDocument document, Object actualLabel, Task task) throws Exception {
+    public Object classify(ReadableDocument document, Object actualLabel, Task task)
+        throws Exception {
       return classify(getInstance(document, actualLabel, pipe));
     }
   }

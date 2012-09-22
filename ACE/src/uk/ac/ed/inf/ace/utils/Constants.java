@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
 
 /**
  * A place for system-wide constants to be housed.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public class Constants {

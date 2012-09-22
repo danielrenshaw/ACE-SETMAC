@@ -144,10 +144,12 @@ public class NaiveBayes extends MalletClassifierBase<uk.ac.ed.inf.ace.config.v1.
               priors.logProbability(classIndex)));
           Logged likelihoods = classesLikelihoods[classIndex];
           Alphabet likelihoodsAlphabet = likelihoods.getAlphabet();
-          MinMaxPriorityQueue<ComparableIDSorter> queue = MinMaxPriorityQueue.<ComparableIDSorter>create();
+          MinMaxPriorityQueue<ComparableIDSorter> queue =
+              MinMaxPriorityQueue.<ComparableIDSorter>create();
 
           for (int likelihoodIndex = 0; likelihoodIndex < likelihoods.size(); likelihoodIndex++) {
-            queue.add(new ComparableIDSorter(new IDSorter(likelihoodIndex, likelihoods.logProbability(likelihoodIndex))));
+            queue.add(new ComparableIDSorter(new IDSorter(likelihoodIndex,
+                likelihoods.logProbability(likelihoodIndex))));
 
             if (queue.size() > 200) {
               queue.removeLast();

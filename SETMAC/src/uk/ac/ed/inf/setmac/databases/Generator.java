@@ -92,36 +92,26 @@ public class Generator {
   }
 
   public void write(File directory) throws Exception {
-    PrintWriter postsPrintWriter = null;
-    PrintWriter postHistoryPrintWriter = null;
+    try (PrintWriter postsPrintWriter = new PrintWriter(new File(directory, "posts.xml"),
+            "UTF-8")) {
+      try (PrintWriter postHistoryPrintWriter = new PrintWriter(new File(directory,
+              "posthistory.xml"), "UTF-8")) {
+        postsPrintWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        postHistoryPrintWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 
-    try {
-      postsPrintWriter = new PrintWriter(new File(directory, "posts.xml"), "UTF-8");
-      postHistoryPrintWriter = new PrintWriter(new File(directory, "posthistory.xml"), "UTF-8");
+        postsPrintWriter.println("<posts>");
+        postHistoryPrintWriter.println("<posthistory>");
 
-      postsPrintWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-      postHistoryPrintWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        Random random = new Random(randomSeed);
 
-      postsPrintWriter.println("<posts>");
-      postHistoryPrintWriter.println("<posthistory>");
+        for (int index = 1; index <= rowCount; index++) {
+          double[] topicDistribution = toCumulativeDistribution(dirichlet.nextDistribution());
+          writePost(postsPrintWriter, random, index, topicDistribution);
+          writePostHistory(postHistoryPrintWriter, random, index, topicDistribution);
+        }
 
-      Random random = new Random(randomSeed);
-
-      for (int index = 1; index <= rowCount; index++) {
-        double[] topicDistribution = toCumulativeDistribution(dirichlet.nextDistribution());
-        writePost(postsPrintWriter, random, index, topicDistribution);
-        writePostHistory(postHistoryPrintWriter, random, index, topicDistribution);
-      }
-
-      postsPrintWriter.print("</posts>");
-      postHistoryPrintWriter.print("</posthistory>");
-    } finally {
-      if (postsPrintWriter != null) {
-        postsPrintWriter.close();
-      }
-
-      if (postHistoryPrintWriter != null) {
-        postHistoryPrintWriter.close();
+        postsPrintWriter.print("</posts>");
+        postHistoryPrintWriter.print("</posthistory>");
       }
     }
   }

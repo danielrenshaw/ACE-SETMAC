@@ -27,8 +27,7 @@ import uk.ac.ed.inf.setmac.Engine;
 /**
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
-public abstract class ConfiguredMalletClassifierBase<C extends uk.ac.ed.inf.setmac.config.v1.MalletClassifierBase>
-    extends MalletClassifierBase<C> {
+public abstract class ConfiguredMalletClassifierBase<C extends uk.ac.ed.inf.setmac.config.v1.MalletClassifierBase> extends MalletClassifierBase<C> {
 
   protected static enum ClassifierType {
 

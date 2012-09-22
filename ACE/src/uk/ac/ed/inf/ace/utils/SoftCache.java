@@ -29,7 +29,6 @@ public class SoftCache extends InstrumentedCache<SupplierEx<?>, Object> {
         CacheBuilder.newBuilder().concurrencyLevel(1).expireAfterAccess(
         evictAfterAccessMinutes, TimeUnit.MINUTES).maximumSize(maximumSize).build(
         new CacheLoader<SupplierEx<?>, Object>() {
-
           @Override
           public Object load(SupplierEx<?> key) throws Exception {
             return key.get();

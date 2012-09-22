@@ -93,7 +93,6 @@ public class ConfusionMatrix implements Iterable<Result> {
   @Override
   public Iterator<Result> iterator() {
     return new Iterator<Result>() {
-
       private final Iterator<Cell<Object, Object, Integer>> cells =
           table.cellSet().iterator();
 

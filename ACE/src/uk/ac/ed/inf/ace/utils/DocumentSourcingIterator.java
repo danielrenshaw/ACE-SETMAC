@@ -67,7 +67,8 @@ public class DocumentSourcingIterator implements Iterator<ReadableDocument> {
           String documentId = documentIds.next();
 
           try {
-            document = new ReadWriteableDocument(documentCache.get(new DocumentCacheQuery(documentId + processorsKey, documentId, docType, preCacheProcessors, random)));
+            document = new ReadWriteableDocument(documentCache.get(new DocumentCacheQuery(
+                documentId + processorsKey, documentId, docType, preCacheProcessors, random)));
 
             for (Processor processor : postCacheProcessors) {
               if (document == null) {

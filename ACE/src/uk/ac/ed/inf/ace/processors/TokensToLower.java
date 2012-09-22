@@ -38,7 +38,6 @@ public class TokensToLower extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.
     document.setContent(
         Iterators.transform(tokens,
         new Function<String, String>() {
-
           @Override
           public String apply(String input) {
             if (input == null) {

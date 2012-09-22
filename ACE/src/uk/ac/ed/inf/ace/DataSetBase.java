@@ -30,10 +30,13 @@ public abstract class DataSetBase<E extends Engine<?, ?>, C extends uk.ac.ed.inf
     super(engine, config);
   }
 
-  protected abstract Iterator<String> getDocumentIds(boolean forTest, Random random) throws Exception;
+  protected abstract Iterator<String> getDocumentIds(boolean forTest, Random random)
+      throws Exception;
 
-  private Iterator<String> getDocumentIds(Random random, int fold, int folds, boolean inFold, boolean forTest) throws Exception {
-    return new FoldingIterator<>(getDocumentIds(forTest, random), random.nextLong(), folds, fold, inFold);
+  private Iterator<String> getDocumentIds(Random random, int fold, int folds, boolean inFold,
+      boolean forTest) throws Exception {
+    return new FoldingIterator<>(getDocumentIds(forTest, random), random.nextLong(), folds, fold,
+        inFold);
   }
 
   private Iterator<ReadableDocument> getDocuments(RandomSource randomSource, int fold, int folds,
@@ -41,7 +44,8 @@ public abstract class DataSetBase<E extends Engine<?, ?>, C extends uk.ac.ed.inf
       Iterable<Processor> postCacheProcessors, final DocType docType) throws Exception {
     final Random random = randomSource.get(this);
     Iterator<String> documentIds = getDocumentIds(random, fold, folds, inFold, forTest);
-    return new DocumentSourcingIterator(documentIds, getEngine().getDocumentCache(), docType, preCacheProcessors, postCacheProcessors, random);
+    return new DocumentSourcingIterator(documentIds, getEngine().getDocumentCache(), docType,
+        preCacheProcessors, postCacheProcessors, random);
   }
 
   @Override

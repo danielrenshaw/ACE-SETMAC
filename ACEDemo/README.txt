@@ -448,11 +448,13 @@ To demonstrate the use of ACE, a simple demonstration project is created step-by
 
     You should now have a complete working system which, when run produces the following output.
 
-    A directory named Baseline-DataSet-DocType-Classifier-IsSpam containing 10 files (a confusion matrix and misclassification file for each of the 5 folds), a file named Baseline-DataSet-DocType-Classifier-IsSpam-ConfusionMatrix.txt (a unified confusion matrix incorporating the results from all cross-validation folds), and a file named Results.csv (summary measures for each experiment).
+    A directory named Baseline-DataSet-DocType-Classifier-IsSpam containing 15 files (a confusion matrix, a misclassification report, and a model description for each of the 5 folds), a file named Baseline-DataSet-DocType-Classifier-IsSpam-ConfusionMatrix.txt (a unified confusion matrix incorporating the results from all cross-validation folds), and a file named Results.csv (summary measures for each experiment).
 
     The files containing confusion matrices should be self-explanatory (besides noting that the actual labels are in the first column and the predicted labels are in the first row).
 
     The misclassification files include a row for each test document which was misclassified. The final column of this file includes a representation of the document content, but since this is a plain Java array in this case, it's not very useful! The third column is the Sqlite rowid which can be used to identify which data was misclassified.
+
+    The contents of the model description files depend on the type of classifier being used. The Weka models produce a good output.
 
     The Results.csv file includes the following measures for each distinct experiment (averaged over cross-validation folds).
 

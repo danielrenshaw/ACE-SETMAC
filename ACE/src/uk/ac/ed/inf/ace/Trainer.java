@@ -20,7 +20,7 @@ package uk.ac.ed.inf.ace;
  * {@link #createModel()} is called will have any effect on the resulting {@link Model}. Calling
  * {@link #createModel()} multiple times or adding documents after creating a {@link Model} will
  * result in undefined behaviour.
- * 
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public interface Trainer {
@@ -37,9 +37,9 @@ public interface Trainer {
 
   /**
    * Produces a trained classification model based on the documents previously added to the trainer.
-   * 
+   *
    * @return The trained classification model.
-   * @throws Exception 
+   * @throws Exception
    */
   Model createModel() throws Exception;
 }

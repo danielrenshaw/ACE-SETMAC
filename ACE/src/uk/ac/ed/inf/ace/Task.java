@@ -24,7 +24,7 @@ import java.util.Set;
 public interface Task extends Named {
 
   Set<Object> getLabels();
-  
+
   Object parseLabel(String label);
 
   Object label(ReadableDocument document);
@@ -32,6 +32,6 @@ public interface Task extends Named {
   Evaluator createEvaluator(Experiment experiment);
 
   Evaluator readEvaluator(Experiment experiment, File file) throws Exception;
-  
+
   Iterable<Object> getTargetLabels();
 }

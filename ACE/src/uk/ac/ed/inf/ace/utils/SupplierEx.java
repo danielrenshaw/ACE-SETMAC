@@ -17,13 +17,14 @@ package uk.ac.ed.inf.ace.utils;
 
 /**
  * Based on {@code com.google.common.base.Supplier} but allows exceptions to be thrown.
+ *
  * @author "Daniel Renshaw" &lt;d.renshaw@sms.ed.ac.uk&gt;
  */
 public interface SupplierEx<T> {
 
   /**
-   * Retrieves an instance of the appropriate type. The returned object may or
-   * may not be a new instance, depending on the implementation.
+   * Retrieves an instance of the appropriate type. The returned object may or may not be a new
+   * instance, depending on the implementation.
    *
    * @return an instance of the appropriate type
    */

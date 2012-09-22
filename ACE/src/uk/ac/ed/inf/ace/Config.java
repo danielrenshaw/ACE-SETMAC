@@ -45,12 +45,10 @@ public class Config {
     configPath = Utilities.ifNull(configPath, DEFAULT_PATH);
     File file = new File(configPath);
     Preconditions.checkState(file.exists(), "Config file missing");
-    InputStream inputStream = null;
     Schema schema;
 
-    try {
-      inputStream = uk.ac.ed.inf.ace.config.v1.Engine.class.getResourceAsStream(
-          CONFIG_XSD_RESOURCE_NAME);
+    try (InputStream inputStream = uk.ac.ed.inf.ace.config.v1.Engine.class.getResourceAsStream(
+            CONFIG_XSD_RESOURCE_NAME)) {
       SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
       StreamSource[] sources;
 
@@ -62,10 +60,6 @@ public class Config {
       }
 
       schema = schemaFactory.newSchema(sources);
-    } finally {
-      if (inputStream != null) {
-        inputStream.close();
-      }
     }
 
     ValidatorHandler validatorHandler = schema.newValidatorHandler();

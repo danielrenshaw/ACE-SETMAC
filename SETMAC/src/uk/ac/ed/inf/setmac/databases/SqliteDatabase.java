@@ -38,7 +38,8 @@ public class SqliteDatabase extends SqliteDatabaseBase<Engine, uk.ac.ed.inf.setm
 
   public SqliteDatabase(Engine engine, uk.ac.ed.inf.setmac.config.v1.SqliteDatabase config)
       throws Exception {
-    super(engine, config, new File(Utilities.ifNull(config.getPathname(), DEFAULT_PATH)), new File(SqliteDatabase.class.getResource(DDL_NAME).getFile()));
+    super(engine, config, new File(Utilities.ifNull(config.getPathname(), DEFAULT_PATH)),
+        new File(SqliteDatabase.class.getResource(DDL_NAME).getFile()));
   }
 
   private File getXmlFile(Site site, String pathname) throws Exception {
@@ -54,8 +55,8 @@ public class SqliteDatabase extends SqliteDatabaseBase<Engine, uk.ac.ed.inf.setm
     Random random = new Random(randomSeed);
 
     if (generateTestData) {
-      Generator generator = new Generator(random.nextLong(), 1_000, new String[]{"aaa", "bbb", "ccc",
-            "ddd", "eee"}, new double[][]{new double[]{1.0, 0.0, 0.0, 0.0, 0.0},
+      Generator generator = new Generator(random.nextLong(), 1_000, new String[]{"aaa", "bbb",
+            "ccc", "ddd", "eee"}, new double[][]{new double[]{1.0, 0.0, 0.0, 0.0, 0.0},
             new double[]{0.0, 0.0, 1.0, 0.0, 0.0}, new double[]{0.0, 0.0, 0.0, 0.0, 1.0}},
           new double[][]{new double[]{1.0, 0.0, 0.0, 0.0, 0.0},
             new double[]{1.0, 0.0, 0.0, 0.0, 0.0}, new double[]{0.0, 1.0, 0.0, 0.0, 0.0}}, 3, 2, 7,

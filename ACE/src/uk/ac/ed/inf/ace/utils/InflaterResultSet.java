@@ -221,7 +221,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateNCharacterStream(String columnLabel, Reader reader, long length) throws SQLException {
+  public void updateNCharacterStream(String columnLabel, Reader reader, long length)
+      throws SQLException {
     delegate.updateNCharacterStream(columnLabel, reader, length);
   }
 
@@ -321,7 +322,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateCharacterStream(String columnLabel, Reader reader, long length) throws SQLException {
+  public void updateCharacterStream(String columnLabel, Reader reader, long length)
+      throws SQLException {
     delegate.updateCharacterStream(columnLabel, reader, length);
   }
 
@@ -331,7 +333,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateCharacterStream(String columnLabel, Reader reader, int length) throws SQLException {
+  public void updateCharacterStream(String columnLabel, Reader reader, int length)
+      throws SQLException {
     delegate.updateCharacterStream(columnLabel, reader, length);
   }
 
@@ -381,12 +384,14 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateBlob(String columnLabel, InputStream inputStream, long length) throws SQLException {
+  public void updateBlob(String columnLabel, InputStream inputStream, long length)
+      throws SQLException {
     delegate.updateBlob(columnLabel, inputStream, length);
   }
 
   @Override
-  public void updateBlob(int columnIndex, InputStream inputStream, long length) throws SQLException {
+  public void updateBlob(int columnIndex, InputStream inputStream, long length)
+      throws SQLException {
     delegate.updateBlob(columnIndex, inputStream, length);
   }
 
@@ -411,7 +416,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateBinaryStream(String columnLabel, InputStream x, long length) throws SQLException {
+  public void updateBinaryStream(String columnLabel, InputStream x, long length)
+      throws SQLException {
     delegate.updateBinaryStream(columnLabel, x, length);
   }
 
@@ -421,7 +427,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateBinaryStream(String columnLabel, InputStream x, int length) throws SQLException {
+  public void updateBinaryStream(String columnLabel, InputStream x, int length)
+      throws SQLException {
     delegate.updateBinaryStream(columnLabel, x, length);
   }
 
@@ -451,7 +458,8 @@ public class InflaterResultSet implements ResultSet, Wrapper {
   }
 
   @Override
-  public void updateAsciiStream(String columnLabel, InputStream x, long length) throws SQLException {
+  public void updateAsciiStream(String columnLabel, InputStream x, long length)
+      throws SQLException {
     delegate.updateAsciiStream(columnLabel, x, length);
   }
 
@@ -660,27 +668,14 @@ public class InflaterResultSet implements ResultSet, Wrapper {
       return null;
     }
 
-    ByteArrayInputStream byteArrayInputStream = null;
-    InflaterInputStream inflaterInputStream = null;
-    InputStreamReader inputStreamReader = null;
-
     try {
-      try {
-        byteArrayInputStream = new ByteArrayInputStream(bytes);
-        inflaterInputStream = new InflaterInputStream(byteArrayInputStream);
-        inputStreamReader = new InputStreamReader(inflaterInputStream, Constants.UTF8_CHARSET);
-        return CharStreams.toString(inputStreamReader);
-      } finally {
-        if (inputStreamReader != null) {
-          inputStreamReader.close();
-        }
-
-        if (inflaterInputStream != null) {
-          inflaterInputStream.close();
-        }
-
-        if (byteArrayInputStream != null) {
-          byteArrayInputStream.close();
+      try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes)) {
+        try (InflaterInputStream inflaterInputStream = new InflaterInputStream(
+                byteArrayInputStream)) {
+          try (InputStreamReader inputStreamReader = new InputStreamReader(inflaterInputStream,
+                  Constants.UTF8_CHARSET)) {
+            return CharStreams.toString(inputStreamReader);
+          }
         }
       }
     } catch (IOException exception) {
