@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright 2012 Daniel Renshaw &lt;d.renshaw@sms.ed.ac.uk&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<engine
+  xmlns="urn://uk/ac/ed/inf/ace/config/v1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn://uk/ac/ed/inf/ace/config/v1 ..\ACE\src\uk\ac\ed\inf\ace\config\v1\config.xsd"
+  name="SimpleEngine"
+  type="uk.ac.ed.inf.ace.SimpleEngine">
+  <databases>
+    <sqliteDatabase
+      name="AceDemo"
+      type="uk.ac.ed.inf.acedemo.databases.SqliteDatabase"
+      pathname="\UG4Project\AceDemo.db" />
+  </databases>
+
+  <environments>
+    <environment
+      name="AceDemo"
+      randomSeed="1"
+      holdOutProportion="0.2"
+      database="AceDemo"
+      outputPath="\AceDemo\Output\"
+      threadPoolSize="2"
+      cacheCapacity="5000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="5"
+      classificationDocType="DocType" />
+  </environments>
+  
+  <dataSets>
+    <dataSet
+      name="DataSet"
+      type="uk.ac.ed.inf.acedemo.datasets.DataSet" />
+  </dataSets>
+
+  <docTypes>
+    <docType
+      name="DocType"
+      type="uk.ac.ed.inf.acedemo.doctypes.DocType"
+      labelPropertyKey="is_spam" />
+  </docTypes>
+
+  <classifiers>
+    <wekaClassifier
+      name="J48"
+      type="uk.ac.ed.inf.acedemo.classifiers.Classifier"
+      wekaType="weka.classifiers.trees.J48" />
+    <wekaClassifier
+      name="NaiveBayes"
+      type="uk.ac.ed.inf.acedemo.classifiers.Classifier"
+      wekaType="weka.classifiers.bayes.NaiveBayes" />
+  </classifiers>
+
+  <tasks>
+    <binaryIntegerTask
+      name="IsSpam"
+      labelPropertyKey="is_spam"
+      trueLabel="1" />
+  </tasks>
+  
+  <preCacheProcessors />
+
+  <postCacheProcessors />
+
+  <programmes>
+    <programme
+      name="Baseline" />
+  </programmes>
+</engine>

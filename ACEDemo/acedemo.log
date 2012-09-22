@@ -1,0 +1,103 @@
+22-12:15:58 01  INFO uk.ac.ed.inf.ace.Ace Starting
+22-12:15:58 01  FINE javax.xml.bind Searching jaxb.properties
+22-12:15:58 01  FINE javax.xml.bind Searching the system property
+22-12:15:58 01  FINE javax.xml.bind Unable to find from OSGi: javax.xml.bind.JAXBContext
+22-12:15:58 01  FINE javax.xml.bind Searching META-INF/services
+22-12:15:58 01  FINE javax.xml.bind Unable to load:META-INF/services/javax.xml.bind.JAXBContext
+22-12:15:58 01  FINE javax.xml.bind Trying to create the platform default provider
+22-12:15:58 01  FINE javax.xml.bind Trying to load com.sun.xml.internal.bind.v2.ContextFactory
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.ContextFactory Property com.sun.xml.internal.bind.XmlAccessorFactoryis not active.  Using JAXBs implementation
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Named.name
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.Boolean uk.ac.ed.inf.ace.config.v1.Enableable.enabled
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.Environment#randomSeed
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.math.BigDecimal uk.ac.ed.inf.ace.config.v1.Environment.holdOutProportion
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Environment.database
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Environment.outputPath
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.Environment#threadPoolSize
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.Environment#crossValidationFolds
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Environment.classificationDocType
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.math.BigDecimal uk.ac.ed.inf.ace.config.v1.Environment.sampleProbability
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.Environment#cacheCapacity
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.Environment#cacheEvictAfterAccess
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$DataSets uk.ac.ed.inf.ace.config.v1.Programme.dataSets
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$DataSets.dataSetBaseOrDataSetRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Typeable.type
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$DocTypes uk.ac.ed.inf.ace.config.v1.Programme.docTypes
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$DocTypes.docTypeBaseOrDocTypeRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.DocTypeBase.labelPropertyKey
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$Classifiers uk.ac.ed.inf.ace.config.v1.Programme.classifiers
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$Classifiers.classifierBaseOrClassifierRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.WekaClassifierBase.wekaType
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$Tasks uk.ac.ed.inf.ace.config.v1.Programme.tasks
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$Tasks.taskBaseOrTaskRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.TaskBase.labelPropertyKey
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.BinaryTaskBase.trueLabel
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$PreCacheProcessors uk.ac.ed.inf.ace.config.v1.Programme.preCacheProcessors
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$PreCacheProcessors.processorBaseOrProcessorRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.ProcessorBase.code
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.FilterByLabel.rule
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedTransducedAccessorFactory Using optimized TransducedAccessor for uk.ac.ed.inf.ace.config.v1.FilterByLabel$Rule#label
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.math.BigDecimal uk.ac.ed.inf.ace.config.v1.FilterByLabel$Rule.sampleProbability
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.FilterByLabel.labelPropertyKey
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.RemoveStopwords.pathname
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.Tokenizer.pattern
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programme$PostCacheProcessors uk.ac.ed.inf.ace.config.v1.Programme.postCacheProcessors
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programme$PostCacheProcessors.processorBaseOrProcessorRef
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.Long uk.ac.ed.inf.ace.config.v1.Programme.randomSeed
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.Integer uk.ac.ed.inf.ace.config.v1.Programme.crossValidationFolds
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.String uk.ac.ed.inf.ace.config.v1.SqliteDatabaseBase.pathname
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.Boolean uk.ac.ed.inf.ace.config.v1.SqliteDatabaseBase.readOnly
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.lang.Integer uk.ac.ed.inf.ace.config.v1.SqliteDatabaseBase.cacheSize
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Databases uk.ac.ed.inf.ace.config.v1.EngineBase.databases
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Databases.databaseBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Environments uk.ac.ed.inf.ace.config.v1.EngineBase.environments
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Environments.environment
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.DataSets uk.ac.ed.inf.ace.config.v1.EngineBase.dataSets
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.DataSets.dataSetBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.DocTypes uk.ac.ed.inf.ace.config.v1.EngineBase.docTypes
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.DocTypes.docTypeBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Classifiers uk.ac.ed.inf.ace.config.v1.EngineBase.classifiers
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Classifiers.classifierBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Tasks uk.ac.ed.inf.ace.config.v1.EngineBase.tasks
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Tasks.taskBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.PreCacheProcessors uk.ac.ed.inf.ace.config.v1.EngineBase.preCacheProcessors
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.PreCacheProcessors.processorBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.PostCacheProcessors uk.ac.ed.inf.ace.config.v1.EngineBase.postCacheProcessors
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.PostCacheProcessors.processorBase
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected uk.ac.ed.inf.ace.config.v1.Programmes uk.ac.ed.inf.ace.config.v1.EngineBase.programmes
+22-12:15:58 01  FINE com.sun.xml.internal.bind.v2.runtime.reflect.opt.OptimizedAccessorFactory Using optimized Accessor for protected java.util.List uk.ac.ed.inf.ace.config.v1.Programmes.programme
+22-12:15:58 01  INFO uk.ac.ed.inf.ace.Environment Accessing database AceDemo
+22-12:15:58 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Database rebuild requested
+22-12:15:58 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Database already exists, deleting
+22-12:15:58 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Opening database
+22-12:15:59 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Creating database structure
+22-12:15:59 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Database build complete
+22-12:15:59 10  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Closing database
+22-12:15:59 12  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-J48-IsSpam-F0
+22-12:15:59 13  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F0
+22-12:15:59 12  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Opening database
+22-12:15:59 13  INFO uk.ac.ed.inf.ace.databases.SqliteDatabaseBase Opening database
+22-12:16:00 13  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F0
+22-12:16:00 13  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-J48-IsSpam-F1
+22-12:16:00 13  INFO uk.ac.ed.inf.ace.utils.InstrumentedCache Documents stats (C-H-M-E-S-F): 10,000 - 1,704 - 8,296 - 0 - 4,601 - 0
+22-12:16:00 12  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-J48-IsSpam-F0
+22-12:16:00 12  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F1
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F1
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-J48-IsSpam-F2
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.utils.InstrumentedCache Documents stats (C-H-M-E-S-F): 20,000 - 11,704 - 8,296 - 0 - 4,601 - 0
+22-12:16:01 13  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-J48-IsSpam-F1
+22-12:16:01 13  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F2
+22-12:16:01 13  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F2
+22-12:16:01 13  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-J48-IsSpam-F3
+22-12:16:01 13  INFO uk.ac.ed.inf.ace.utils.InstrumentedCache Documents stats (C-H-M-E-S-F): 30,000 - 21,704 - 8,296 - 0 - 4,601 - 0
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-J48-IsSpam-F2
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F3
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F3
+22-12:16:01 12  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-J48-IsSpam-F4
+22-12:16:02 13  INFO uk.ac.ed.inf.ace.utils.InstrumentedCache Documents stats (C-H-M-E-S-F): 40,000 - 31,704 - 8,296 - 0 - 4,601 - 0
+22-12:16:02 13  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-J48-IsSpam-F3
+22-12:16:02 13  INFO uk.ac.ed.inf.ace.Experiment Starting experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F4
+22-12:16:02 13  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-NaiveBayes-IsSpam-F4
+22-12:16:02 12  INFO uk.ac.ed.inf.ace.Experiment Completed experiment Baseline-DataSet-DocType-J48-IsSpam-F4
+22-12:16:02 10  INFO uk.ac.ed.inf.ace.MainThread All programmes completed
+22-12:16:08 01  INFO uk.ac.ed.inf.ace.Ace Quitting
