@@ -37,7 +37,6 @@ public class DocumentCacheQuery {
   /**
    * @param key The unique identifier for the processed document.
    * @param documentId The unique identifier for the unprocessed document.
-   * @param dictionary The index of words needed to extract encode/decode document content.
    * @param docType Provides a means of loading the document, if needed.
    * @param processors The set of processors that should be applied to a newly loaded document.
    */
