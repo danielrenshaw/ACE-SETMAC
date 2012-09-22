@@ -60,19 +60,18 @@ public class RemoveStopwords
 
     stopwords = builder.build();
   }
+  private final Predicate<String> IS_NOT_STOPWORD = new Predicate<String>() {
+    @Override
+    public boolean apply(String input) {
+      return !stopwords.contains(input);
+    }
+  };
 
   @Override
   public ReadWriteableDocument process(ReadWriteableDocument document) {
     @SuppressWarnings("unchecked")
     Iterator<String> tokens = (Iterator<String>) document.getContent();
-    document.setContent(
-        Iterators.filter(tokens,
-        new Predicate<String>() {
-          @Override
-          public boolean apply(String input) {
-            return !stopwords.contains(input);
-          }
-        }));
+    document.setContent(Iterators.filter(tokens, IS_NOT_STOPWORD));
     return document;
   }
 }

@@ -27,6 +27,17 @@ import uk.ac.ed.inf.ace.ReadWriteableDocument;
  */
 public class TokensToLower extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v1.Processor> {
 
+  private static final Function<String, String> TO_LOWER_CASE = new Function<String, String>() {
+    @Override
+    public String apply(String input) {
+      if (input == null) {
+        return "";
+      }
+
+      return input.toLowerCase();
+    }
+  };
+
   public TokensToLower(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.Processor config) {
     super(engine, config);
   }
@@ -35,18 +46,7 @@ public class TokensToLower extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.
   public ReadWriteableDocument process(ReadWriteableDocument document) {
     @SuppressWarnings("unchecked")
     Iterator<String> tokens = (Iterator<String>) document.getContent();
-    document.setContent(
-        Iterators.transform(tokens,
-        new Function<String, String>() {
-          @Override
-          public String apply(String input) {
-            if (input == null) {
-              return "";
-            }
-
-            return input.toLowerCase();
-          }
-        }));
+    document.setContent(Iterators.transform(tokens, TO_LOWER_CASE));
     return document;
   }
 }

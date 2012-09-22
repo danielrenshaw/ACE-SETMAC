@@ -56,16 +56,16 @@ public class SparseMatrix<K, V> extends HashMap<List<K>, V> {
     Preconditions.checkState(keys.size() == dimensions, "Dimensions mismatch");
     return super.put(keys, value);
   }
+  private final Predicate<List<K>> CORRECT_SIZE = new Predicate<List<K>>() {
+    @Override
+    public boolean apply(List<K> keys) {
+      return keys.size() == dimensions;
+    }
+  };
 
   @Override
   public void putAll(Map<? extends List<K>, ? extends V> m) {
-    Preconditions.checkState(Iterables.all(m.keySet(),
-        new Predicate<List<K>>() {
-          @Override
-          public boolean apply(List<K> keys) {
-            return keys.size() == dimensions;
-          }
-        }), "Dimensions mismatch");
+    Preconditions.checkState(Iterables.all(m.keySet(), CORRECT_SIZE), "Dimensions mismatch");
     super.putAll(m);
   }
 }

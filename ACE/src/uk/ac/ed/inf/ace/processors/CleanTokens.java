@@ -28,6 +28,23 @@ import uk.ac.ed.inf.ace.ReadWriteableDocument;
  */
 public class CleanTokens extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.config.v1.Processor> {
 
+  private static final Function<String, String> NULL_TO_EMPTY = new Function<String, String>() {
+    @Override
+    public String apply(String input) {
+      if (input == null) {
+        return "";
+      }
+
+      return input.trim();
+    }
+  };
+  private static final Predicate<String> IS_NOT_EMPTY = new Predicate<String>() {
+    @Override
+    public boolean apply(String input) {
+      return !input.isEmpty();
+    }
+  };
+
   public CleanTokens(Engine<?, ?> engine, uk.ac.ed.inf.ace.config.v1.Processor config) {
     super(engine, config);
   }
@@ -37,24 +54,7 @@ public class CleanTokens extends ProcessorBase<Engine<?, ?>, uk.ac.ed.inf.ace.co
     @SuppressWarnings("unchecked")
     Iterator<String> tokens = (Iterator<String>) document.getContent();
     document.setContent(
-        Iterators.filter(
-        Iterators.transform(tokens,
-        new Function<String, String>() {
-          @Override
-          public String apply(String input) {
-            if (input == null) {
-              return "";
-            }
-
-            return input.trim();
-          }
-        }),
-        new Predicate<String>() {
-          @Override
-          public boolean apply(String input) {
-            return !input.isEmpty();
-          }
-        }));
+        Iterators.filter(Iterators.transform(tokens, NULL_TO_EMPTY), IS_NOT_EMPTY));
     return document;
   }
 }
