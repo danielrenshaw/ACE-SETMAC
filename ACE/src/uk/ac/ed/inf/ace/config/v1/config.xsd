@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright 2012 Daniel Renshaw &lt;d.renshaw@sms.ed.ac.uk&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+
+
+  This file defines the structure of the config XML file and is used to generate classes for parsing such config files
+  using JAXB.
+
+  To regenerate the config classes run the following command from the project root:
+
+  xjc.exe -d src -mark-generated src\uk\ac\ed\inf\ace\config\v1\config.xsd
+  
+  Note that the version of "xjc" used should match that of "javac" and "java".
+-->
+<xs:schema targetNamespace="urn://uk/ac/ed/inf/ace/config/v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ace="urn://uk/ac/ed/inf/ace/config/v1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
+           elementFormDefault="qualified"
+           jaxb:version="2.0">
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:globalBindings fixedAttributeAsConstantProperty="true" />
+    </xs:appinfo>
+  </xs:annotation>  
+
+  <xs:simpleType name="nonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="100" />
+      <xs:pattern value="\S(.*\S)?" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="proportion">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0.0" />
+      <xs:maxInclusive value="1.0" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="positiveNonZeroInt">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="positiveInt">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+    
+  <xs:complexType name="named" abstract="true">
+    <xs:attribute name="name" type="ace:nonEmptyString" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="enableable" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:named">
+        <xs:attribute name="enabled" type="xs:boolean" default="true" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="typeable" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:enableable">
+        <xs:attribute name="type" type="ace:nonEmptyString" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="reference">
+    <xs:complexContent>
+      <xs:extension base="ace:enableable" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="environment">
+    <xs:complexContent>
+      <xs:extension base="ace:named">
+        <xs:attribute name="randomSeed" type="xs:long" use="required" />
+        <xs:attribute name="holdOutProportion" type="ace:proportion" use="required" />
+        <xs:attribute name="database" type="ace:nonEmptyString" use="required" />
+        <xs:attribute name="outputPath" type="ace:nonEmptyString" use="required" />
+        <xs:attribute name="threadPoolSize" type="ace:positiveNonZeroInt" use="required" />
+        <xs:attribute name="crossValidationFolds" type="ace:positiveNonZeroInt" use="required" />
+        <xs:attribute name="classificationDocType" type="ace:nonEmptyString" use="required" />
+        <xs:attribute name="sampleProbability" type="ace:proportion" default="1.0" />
+        <xs:attribute name="cacheCapacity" type="ace:positiveInt" use="required" />
+        <xs:attribute name="cacheEvictAfterAccess" type="ace:positiveInt" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="databaseBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable" />
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="databaseBase" type="ace:databaseBase" abstract="true" />
+  
+  <xs:element name="database" substitutionGroup="ace:databaseBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:databaseBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="sqliteDatabaseBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:databaseBase">
+        <xs:attribute name="pathname" type="ace:nonEmptyString" use="required" />
+        <xs:attribute name="readOnly" type="xs:boolean" default="true" />
+        <xs:attribute name="cacheSize" type="ace:positiveInt" default="2000" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="sqliteDatabase" substitutionGroup="ace:databaseBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:sqliteDatabaseBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="dataSetBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable" />
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="dataSetBase" type="ace:dataSetBase" abstract="true" />
+  
+  <xs:element name="dataSet" substitutionGroup="ace:dataSetBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:dataSetBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="docTypeBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable">
+        <xs:attribute name="labelPropertyKey" type="ace:nonEmptyString" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="docTypeBase" type="ace:docTypeBase" abstract="true" />
+  
+  <xs:element name="docType" substitutionGroup="ace:docTypeBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:docTypeBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="classifierBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable" />
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="classifierBase" type="ace:classifierBase" abstract="true" />
+  
+  <xs:element name="classifier" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:classifierBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="wekaClassifierBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:classifierBase">
+        <xs:attribute name="wekaType" type="ace:nonEmptyString" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="wekaClassifier" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:wekaClassifierBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="taskBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable">
+        <xs:attribute name="labelPropertyKey" type="ace:nonEmptyString" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="taskBase" type="ace:taskBase" abstract="true" />
+
+  <xs:element name="task" substitutionGroup="ace:taskBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:taskBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="binaryTaskBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:taskBase">
+        <xs:attribute name="trueLabel" type="ace:nonEmptyString" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="binaryTaskBase" type="ace:binaryTaskBase" abstract="true" />
+
+  <xs:element name="binaryTask" substitutionGroup="ace:taskBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:binaryTaskBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="multiClassTaskBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:taskBase">
+        <xs:attribute name="labels" use="required">
+          <xs:simpleType>
+            <xs:list itemType="ace:nonEmptyString" />
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="multiClassTaskBase" type="ace:multiClassTaskBase" abstract="true" />
+
+  <xs:element name="multiClassTask" substitutionGroup="ace:taskBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:multiClassTaskBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="binaryIntegerTask" substitutionGroup="ace:taskBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:binaryTaskBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.ace.tasks.BinaryIntegerTask" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="multiClassIntegerTask" substitutionGroup="ace:taskBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:multiClassTaskBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.ace.tasks.MultiClassIntegerTask" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="processorBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable">
+        <xs:attribute name="code" type="ace:nonEmptyString" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="processorBase" type="ace:processorBase" abstract="true" />
+
+  <xs:element name="processor" substitutionGroup="ace:processorBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:processorBase">
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="tokenizerBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:processorBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.ace.processors.Tokenizer" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="tokenizer" substitutionGroup="ace:processorBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ace:tokenizerBase">
+          <xs:attribute name="pattern" type="ace:nonEmptyString" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="removeStopwordsBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:processorBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.ace.processors.RemoveStopwords" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="removeStopwords" substitutionGroup="ace:processorBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ace:removeStopwordsBase">
+          <xs:attribute name="pathname" type="ace:nonEmptyString" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="filterByLabelBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:processorBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.ace.processors.FilterByLabel" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="filterByLabel" substitutionGroup="ace:processorBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ace:filterByLabelBase">
+          <xs:sequence>
+            <xs:element name="rule" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="label" type="xs:int" use="required" />
+                <xs:attribute name="sampleProbability" type="ace:proportion" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="labelPropertyKey" type="ace:nonEmptyString" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="databases">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:databaseBase" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="databaseKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+  
+  <xs:element name="environments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="environment" type="ace:environment" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="uniqueEnvironment">
+      <xs:selector xpath="ace:environment" />
+      <xs:field xpath="@name" />
+    </xs:unique>
+  </xs:element>
+  
+  <xs:element name="dataSets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:dataSetBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="dataSetKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+  
+  <xs:element name="docTypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:docTypeBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="docTypeKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+  
+  <xs:element name="classifiers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:classifierBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="classifierKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+  
+  <xs:element name="tasks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:taskBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="taskKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+
+  <xs:element name="preCacheProcessors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:processorBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="preCacheProcessorKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+
+  <xs:element name="postCacheProcessors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ace:processorBase" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="postCacheProcessorKey">
+      <xs:selector xpath="*" />
+      <xs:field xpath="@name" />
+    </xs:key>
+  </xs:element>
+
+  <xs:complexType name="programme">
+    <xs:complexContent>
+      <xs:extension base="ace:enableable">
+        <xs:sequence>
+          <xs:element name="dataSets" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:dataSetBase" />
+                <xs:element name="dataSetRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammeDataSet">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="docTypes" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:docTypeBase" />
+                <xs:element name="docTypeRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammeDocType">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="classifiers" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:classifierBase" />
+                <xs:element name="classifierRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammeClassifier">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="tasks" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:taskBase" />
+                <xs:element name="taskRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammeTask">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="preCacheProcessors" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:processorBase" />
+                <xs:element name="processorRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammePreCacheProcessor">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="postCacheProcessors" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ace:processorBase" />
+                <xs:element name="processorRef" type="ace:reference" />
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="uniqueProgrammePostCacheProcessor">
+              <xs:selector xpath="*" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="randomSeed" type="xs:long" />
+        <xs:attribute name="crossValidationFolds" type="ace:positiveNonZeroInt" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="programmes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="programme" type="ace:programme" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="uniqueProgramme">
+      <xs:selector xpath="ace:programme" />
+      <xs:field xpath="@name" />
+    </xs:unique>
+  </xs:element>
+
+  <xs:complexType name="engineBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:typeable">
+        <xs:sequence>
+          <xs:element ref="ace:databases" />
+          <xs:element ref="ace:environments" />
+          <xs:element ref="ace:dataSets" />
+          <xs:element ref="ace:docTypes" />
+          <xs:element ref="ace:classifiers" />
+          <xs:element ref="ace:tasks" />
+          <xs:element ref="ace:preCacheProcessors" />
+          <xs:element ref="ace:postCacheProcessors" />
+          <xs:element ref="ace:programmes" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="engine">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="ace:engineBase">
+          <xs:sequence>
+            <xs:element ref="ace:databases" />
+            <xs:element ref="ace:environments" />
+            <xs:element ref="ace:dataSets" />
+            <xs:element ref="ace:docTypes" />
+            <xs:element ref="ace:classifiers" />
+            <xs:element ref="ace:tasks" />
+            <xs:element ref="ace:preCacheProcessors" />
+            <xs:element ref="ace:postCacheProcessors" />
+            <xs:element ref="ace:programmes" />
+          </xs:sequence>
+          <xs:attribute name="type" type="ace:nonEmptyString" use="required" />
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+    <xs:keyref name="environmentDatabase" refer="ace:databaseKey">
+      <xs:selector xpath="ace:environments/ace:environment" />
+      <xs:field xpath="@database" />
+    </xs:keyref>
+    <xs:keyref name="environmentClassificationDocType" refer="ace:docTypeKey">
+      <xs:selector xpath="ace:environments/ace:environment" />
+      <xs:field xpath="@classificationDocType" />
+    </xs:keyref>
+    <xs:keyref name="programmeDataSetRef" refer="ace:dataSetKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:dataSets/ace:dataSetRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeDocTypeRef" refer="ace:docTypeKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:docTypes/ace:docTypeRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeClassifierRef" refer="ace:classifierKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:classifiers/ace:classifierRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeTaskRef" refer="ace:taskKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:tasks/ace:taskRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmePreCacheProcessorRef" refer="ace:preCacheProcessorKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:preCacheProcessors/ace:processorRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmePostCacheProcessorRef" refer="ace:postCacheProcessorKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:postCacheProcessors/ace:processorRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>
