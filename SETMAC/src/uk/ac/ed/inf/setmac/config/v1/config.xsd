@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright 2012 Daniel Renshaw &lt;d.renshaw@sms.ed.ac.uk&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+
+
+  This file defines the structure of the config XML file and is used to generate classes for parsing such config files
+  using JAXB.
+
+  To regenerate the config classes run the following command from the project root:
+
+  xjc.exe -d src -mark-generated src\uk\ac\ed\inf\setmac\config\v1\config.xsd
+  
+  Note that the version of "xjc" used should match that of "javac" and "java".
+-->
+<xs:schema targetNamespace="urn://uk/ac/ed/inf/setmac/config/v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ace="urn://uk/ac/ed/inf/ace/config/v1"
+           xmlns:setmac="urn://uk/ac/ed/inf/setmac/config/v1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
+           elementFormDefault="qualified"
+           jaxb:version="2.0">
+  <xs:import namespace="urn://uk/ac/ed/inf/ace/config/v1" schemaLocation="..\..\..\..\..\..\..\..\..\ACE\src\uk\ac\ed\inf\ace\config\v1\config.xsd" />
+  
+  <xs:complexType name="site">
+    <xs:complexContent>
+      <xs:extension base="ace:enableable">
+        <xs:attribute name="xmlPath" type="ace:nonEmptyString" use="required" />
+        <xs:attribute name="sampleProbability" type="ace:proportion" default="1.0" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="sqliteDatabaseBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:sqliteDatabaseBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.databases.SqliteDatabase" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="sqliteDatabase" substitutionGroup="ace:databaseBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:sqliteDatabaseBase">
+          <xs:attribute name="xmlPath" type="ace:nonEmptyString" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="dataSetBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:dataSetBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.datasets.SiteBasedDataSet" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="dataSet" substitutionGroup="ace:dataSetBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:dataSetBase">
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="site" type="setmac:site" />
+            <xs:element name="siteRef" type="ace:reference" />
+          </xs:choice>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+    <xs:unique name="uniqueSiteRef">
+      <xs:selector xpath="setmac:siteRef" />
+      <xs:field xpath="@name" />
+    </xs:unique>
+  </xs:element>
+  
+  <xs:complexType name="flaggedBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:docTypeBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.doctypes.Flagged" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="flagged" substitutionGroup="ace:docTypeBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:flaggedBase">
+          <xs:attribute name="includeAnswers" type="xs:boolean" use="required" />
+          <xs:attribute name="includeQuestionComments" type="xs:boolean" use="required" />
+          <xs:attribute name="includeAnswerComments" type="xs:boolean" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="malletClassifierBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ace:classifierBase">
+        <xs:attribute name="numTopics" type="ace:positiveNonZeroInt" default="10" />
+        <xs:attribute name="showTopicsInterval" type="ace:positiveInt" default="0" />
+        <xs:attribute name="topWords" type="ace:positiveInt" default="20" />
+        <xs:attribute name="numIterations" type="ace:positiveNonZeroInt" default="1000" />
+        <xs:attribute name="optimizeInterval" type="ace:positiveInt" default="0" />
+        <xs:attribute name="optimizeBurnIn" type="ace:positiveInt" default="200" />
+        <xs:attribute name="classifierType" default="MinimumDistance">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Svm" />
+              <xs:enumeration value="MinimumDistance" />
+              <xs:enumeration value="GaussianDistance" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ldaBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="setmac:malletClassifierBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.classifiers.LDA" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="simpleLdaBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="setmac:malletClassifierBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.classifiers.LDAAlt" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ldaSvmBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="setmac:malletClassifierBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.classifiers.LdaSvm" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="dmrBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="setmac:malletClassifierBase">
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.classifiers.DMR" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="lda" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:ldaBase">
+          <xs:attribute name="alpha" type="xs:decimal" default="50.0" />
+          <xs:attribute name="beta" type="xs:decimal" default="0.01" />
+          <xs:attribute name="useSymmetricAlpha" type="xs:boolean" default="false" />
+          <xs:attribute name="numThreads" type="ace:positiveNonZeroInt" default="1" />
+          <xs:attribute name="printLogLikelihood" type="xs:boolean" default="true" />
+          <xs:attribute name="numEstimatorParticles" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="estimatorUsingResampling" type="xs:boolean" default="false" />
+          <xs:attribute name="numInferencerIterations" type="ace:positiveInt" default="100" />
+          <xs:attribute name="inferencerThinning" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="inferencerBurnIn" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="instanceModelDistanceType" default="LeftToRight">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="None" />
+                <xs:enumeration value="LeftToRight" />
+                <xs:enumeration value="MeanTopics" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="simpleLda" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:simpleLdaBase">
+          <xs:attribute name="alpha" type="xs:decimal" default="50.0" />
+          <xs:attribute name="beta" type="xs:decimal" default="0.01" />
+          <xs:attribute name="numInferencerIterations" type="ace:positiveInt" default="100" />
+          <xs:attribute name="inferencerThinning" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="inferencerBurnIn" type="ace:positiveNonZeroInt" default="10" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ldaSvm" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:ldaSvmBase">
+          <xs:attribute name="alpha" type="xs:decimal" default="50.0" />
+          <xs:attribute name="beta" type="xs:decimal" default="0.01" />
+          <xs:attribute name="useSymmetricAlpha" type="xs:boolean" default="false" />
+          <xs:attribute name="numThreads" type="ace:positiveNonZeroInt" default="1" />
+          <xs:attribute name="printLogLikelihood" type="xs:boolean" default="true" />
+          <xs:attribute name="numInferencerIterations" type="ace:positiveInt" default="100" />
+          <xs:attribute name="inferencerThinning" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="inferencerBurnIn" type="ace:positiveNonZeroInt" default="10" />
+          <xs:attribute name="svmType" default="CSvc">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="CSvc" />
+                <xs:enumeration value="NuSvc" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="svmKernelType" default="RBF">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="Linear" />
+                <xs:enumeration value="Polynomial" />
+                <xs:enumeration value="RBF" />
+                <xs:enumeration value="Sigmoid" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="svmDegree" type="ace:positiveNonZeroInt" default="3" />
+          <xs:attribute name="svmGamma" type="xs:decimal" default="0.5" />
+          <xs:attribute name="svmCoef0" type="xs:decimal" default="0.0" />
+          <xs:attribute name="svmCost" type="xs:decimal" default="100.0" />
+          <xs:attribute name="svmNu" type="xs:decimal" default="0.5" />
+          <xs:attribute name="svmLossFunctionEpsilon" type="xs:decimal" default="0.1" />
+          <xs:attribute name="svmCacheSize" type="ace:positiveNonZeroInt" default="40" />
+          <xs:attribute name="svmTerminationToleranceEpsilon" type="xs:decimal" default="0.001" />
+          <xs:attribute name="svmShrinking" type="xs:boolean" default="true" />
+          <xs:attribute name="svmProbabilityEstimates" type="xs:boolean" default="false" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="dmr" substitutionGroup="ace:classifierBase">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:dmrBase">
+          <xs:attribute name="numSamples" type="ace:positiveNonZeroInt" default="10" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="engineBase" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="ace:engineBase">
+        <xs:sequence>
+          <xs:element ref="ace:databases" />
+          <xs:element ref="ace:environments" />
+          <xs:element ref="ace:dataSets" />
+          <xs:element ref="ace:docTypes" />
+          <xs:element ref="ace:classifiers" />
+          <xs:element ref="ace:tasks" />
+          <xs:element ref="ace:preCacheProcessors" />
+          <xs:element ref="ace:postCacheProcessors" />
+          <xs:element ref="ace:programmes" />
+        </xs:sequence>
+        <xs:attribute name="type" type="ace:nonEmptyString" fixed="uk.ac.ed.inf.setmac.Engine" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="engine">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="setmac:engineBase">
+          <xs:sequence>
+            <xs:element name="sites">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="site" type="setmac:site" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+              <xs:key name="siteKey">
+                <xs:selector xpath="setmac:site" />
+                <xs:field xpath="@name" />
+              </xs:key>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+    <xs:keyref name="environmentDatabase" refer="ace:databaseKey">
+      <xs:selector xpath="ace:environments/ace:environment" />
+      <xs:field xpath="@database" />
+    </xs:keyref>
+    <xs:keyref name="environmentClassificationDocType" refer="ace:docTypeKey">
+      <xs:selector xpath="ace:environments/ace:environment" />
+      <xs:field xpath="@classificationDocType" />
+    </xs:keyref>
+    <xs:keyref name="programmeDataSetRef" refer="ace:dataSetKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:dataSets/ace:dataSetRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeDocTypeRef" refer="ace:docTypeKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:docTypes/ace:docTypeRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeClassifierRef" refer="ace:classifierKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:classifiers/ace:classifierRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeTaskRef" refer="ace:taskKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:tasks/ace:taskRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmePreCacheProcessorRef" refer="ace:preCacheProcessorKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:preCacheProcessors/ace:processorRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmePostCacheProcessorRef" refer="ace:postCacheProcessorKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:postCacheProcessors/ace:processorRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="dataSetSiteRef" refer="setmac:siteKey">
+      <xs:selector xpath="ace:dataSets/setmac:dataSet/setmac:siteRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+    <xs:keyref name="programmeDataSetSiteRef" refer="setmac:siteKey">
+      <xs:selector xpath="ace:programmes/ace:programme/ace:dataSets/setmac:dataSet/setmac:siteRef" />
+      <xs:field xpath="@name" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>
