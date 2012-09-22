@@ -1,0 +1,19 @@
+- Make XJC generated classes immutable
+- Flatten collections in XJC generated classes
+- Add XJC commands to build
+- /? type option on command line
+- online vs batch: batch of batches and combine (but how to combine models?)
+- prefix tags, code, title tokens? increase weight, tf-idf?
+- discuss use of title and tags
+- Xerces bug in running instructions (need to use SUN JRE for regular running, with Xerces proper for data loading)
+- In DataSet:
+  - Include migrated questions on other sites
+  - Could extract multiple events (closure reasons change over time)
+  - Effect of other attributes (e.g. community owned, etc)
+  - Assume most recent version is the version that was closed (but might a question have been altered after it was closed - it can be)?
+  - Answers might be posted after a question is closed? - would change the content for making the close decision
+  - Change from subjective to not constructive (document this issue)
+- Which NB is being used? binary or bag of words?
+- Extract tags, title, answers, etc separately and combine in Java with parameterised rules (e.g. prefix tokens)
+- Use fixed boundary loglikelihood to select label
+- Document: using same default as Mallet command line tools initially

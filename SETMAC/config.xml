@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright 2012 Daniel Renshaw &lt;d.renshaw@sms.ed.ac.uk&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<setmac:engine
+  xmlns="urn://uk/ac/ed/inf/ace/config/v1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:setmac="urn://uk/ac/ed/inf/setmac/config/v1"
+  xsi:schemaLocation="urn://uk/ac/ed/inf/ace/config/v1 ..\..\..\..\..\..\..\..\..\ACE\src\uk\ac\ed\inf\ace\config\v1\config.xsd urn://uk/ac/ed/inf/setmac/config/v1 src\uk\ac\ed\inf\setmac\config\v1\config.xsd"
+  name="Engine">
+  <databases>
+    <setmac:sqliteDatabase
+      name="Test"
+      pathname="\UG4Project\Test.db"
+      xmlPath="\UG4Project\StackExchangeData\Content\" />
+    <setmac:sqliteDatabase
+      name="Standard"
+      pathname="\UG4Project\StackExchange.db"
+      xmlPath="\UG4Project\StackExchangeData\Content\" />
+    <setmac:sqliteDatabase
+      name="DatabaseQuery"
+      readOnly="false"
+      pathname="\UG4Project\StackExchange.db"
+      xmlPath="\UG4Project\StackExchangeData\Content\" />
+  </databases>
+
+  <environments>
+    <environment
+      name="DICE"
+      randomSeed="1"
+      holdOutProportion="0.2"
+      database="Standard"
+      outputPath="~/UG4Project/Output/"
+      threadPoolSize="2"
+      cacheCapacity="100000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="5"
+      classificationDocType="QuestionOnly" />
+    <environment
+      name="Desktop"
+      randomSeed="1"
+      holdOutProportion="0.2"
+      database="Standard"
+      outputPath="D:\UG4Project\Output\"
+      threadPoolSize="10"
+      cacheCapacity="90000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="5"
+      classificationDocType="QuestionOnly" />
+    <environment
+      name="Laptop"
+      randomSeed="1"
+      holdOutProportion="0.2"
+      database="Standard"
+      outputPath="C:\UG4Project\Output\"
+      threadPoolSize="5"
+      cacheCapacity="112000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="5"
+      classificationDocType="QuestionOnly" />
+    <environment
+      name="Test"
+      randomSeed="1"
+      holdOutProportion="0.0"
+      database="Test"
+      outputPath="D:\UG4Project\Output\"
+      threadPoolSize="1"
+      cacheCapacity="100000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="1"
+      classificationDocType="QuestionOnly" />
+    <environment
+      name="DatabaseQuery"
+      randomSeed="1"
+      holdOutProportion="0.2"
+      database="DatabaseQuery"
+      outputPath="C:\UG4Project\Output\"
+      threadPoolSize="1"
+      cacheCapacity="100000"
+      cacheEvictAfterAccess="60"
+      crossValidationFolds="5"
+      classificationDocType="QuestionOnly" />
+  </environments>
+  
+  <dataSets>
+    <setmac:dataSet name="Test">
+      <setmac:siteRef name="Test" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AndroidEnthusiasts">
+      <setmac:siteRef name="Android Enthusiasts" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AndroidEnthusiastsMeta">
+      <setmac:siteRef name="Android Enthusiasts Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Apple">
+      <setmac:siteRef name="Apple" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AppleMeta">
+      <setmac:siteRef name="Apple Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AskUbuntu">
+      <setmac:siteRef name="Ask Ubuntu" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AskUbuntuMeta">
+      <setmac:siteRef name="Ask Ubuntu Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Bicycles">
+      <setmac:siteRef name="Bicycles" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="BicyclesMeta">
+      <setmac:siteRef name="Bicycles Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Cooking">
+      <setmac:siteRef name="Cooking" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="CookingMeta">
+      <setmac:siteRef name="Cooking Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="DatabaseAdministrators">
+      <setmac:siteRef name="Database Administrators" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="DatabaseAdministratorsMeta">
+      <setmac:siteRef name="Database Administrators Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="DrupalAnswers">
+      <setmac:siteRef name="Drupal Answers" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="DrupalAnswersMeta">
+      <setmac:siteRef name="Drupal Answers Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ElectricalEngineering">
+      <setmac:siteRef name="Electrical Engineering" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ElectricalEngineeringMeta">
+      <setmac:siteRef name="Electrical Engineering Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="EnglishLanguageAndUsage">
+      <setmac:siteRef name="English Language and Usage" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="EnglishLanguageAndUsageMeta">
+      <setmac:siteRef name="English Language and Usage Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="GameDevelopment">
+      <setmac:siteRef name="Game Development" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="GameDevelopmentMeta">
+      <setmac:siteRef name="Game Development Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Gaming">
+      <setmac:siteRef name="Gaming" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="GamingMeta">
+      <setmac:siteRef name="Gaming Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="GIS">
+      <setmac:siteRef name="GIS" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="GISMeta">
+      <setmac:siteRef name="GIS Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="HomeImprovement">
+      <setmac:siteRef name="Home Improvement" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="HomeImprovementMeta">
+      <setmac:siteRef name="Home Improvement Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ITSecurity">
+      <setmac:siteRef name="IT Security" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ITSecurityMeta">
+      <setmac:siteRef name="IT Security Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Mathematics">
+      <setmac:siteRef name="Mathematics" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MathematicsMeta">
+      <setmac:siteRef name="Mathematics Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MetaServerFault">
+      <setmac:siteRef name="Meta Server Fault" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MetaStackOverflow">
+      <setmac:siteRef name="Meta Stack Overflow" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MetaSuperUser">
+      <setmac:siteRef name="Meta Super User" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Photography">
+      <setmac:siteRef name="Photography" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="PhotographyMeta">
+      <setmac:siteRef name="Photography Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Physics">
+      <setmac:siteRef name="Physics" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="PhysicsMeta">
+      <setmac:siteRef name="Physics Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Programmers">
+      <setmac:siteRef name="Programmers" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ProgrammersMeta">
+      <setmac:siteRef name="Programmers Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="ServerFault">
+      <setmac:siteRef name="Server Fault" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="StackApps">
+      <setmac:siteRef name="Stack Apps" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="StatisticalAnalysis">
+      <setmac:siteRef name="Statistical Analysis" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="StatisticalAnalysisMeta">
+      <setmac:siteRef name="Statistical Analysis Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="SuperUser">
+      <setmac:siteRef name="Super User" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="TeXLaTeX">
+      <setmac:siteRef name="TeX - LaTeX" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="TeXLaTeXMeta">
+      <setmac:siteRef name="TeX - LaTeX Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="TheoreticalComputerScience">
+      <setmac:siteRef name="Theoretical Computer Science" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="TheoreticalComputerScienceMeta">
+      <setmac:siteRef name="Theoretical Computer Science Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="UnixAndLinux">
+      <setmac:siteRef name="Unix and Linux" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="UnixAndLinuxMeta">
+      <setmac:siteRef name="Unix and Linux Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="WebApplications">
+      <setmac:siteRef name="Web Applications" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="WebApplicationsMeta">
+      <setmac:siteRef name="Web Applications Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="Webmasters">
+      <setmac:siteRef name="Webmasters" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="WebmastersMeta">
+      <setmac:siteRef name="Webmasters Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="WordPress">
+      <setmac:siteRef name="WordPress" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="WordPressMeta">
+      <setmac:siteRef name="WordPress Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="AllMetaSites">
+      <setmac:siteRef name="Android Enthusiasts Meta" />
+      <setmac:siteRef name="Apple Meta" />
+      <setmac:siteRef name="Ask Ubuntu Meta" />
+      <setmac:siteRef name="Bicycles Meta" />
+      <setmac:siteRef name="Cooking Meta" />
+      <setmac:siteRef name="Database Administrators Meta" />
+      <setmac:siteRef name="Drupal Answers Meta" />
+      <setmac:siteRef name="Electrical Engineering Meta" />
+      <setmac:siteRef name="English Language and Usage Meta" />
+      <setmac:siteRef name="Game Development Meta" />
+      <setmac:siteRef name="Gaming Meta" />
+      <setmac:siteRef name="GIS Meta" />
+      <setmac:siteRef name="Home Improvement Meta" />
+      <setmac:siteRef name="IT Security Meta" />
+      <setmac:siteRef name="Mathematics Meta" />
+      <setmac:siteRef name="Meta Server Fault" />
+      <setmac:siteRef name="Meta Stack Overflow" />
+      <setmac:siteRef name="Meta Super User" />
+      <setmac:siteRef name="Photography Meta" />
+      <setmac:siteRef name="Physics Meta" />
+      <setmac:siteRef name="Programmers Meta" />
+      <setmac:siteRef name="Statistical Analysis Meta" />
+      <setmac:siteRef name="TeX - LaTeX Meta" />
+      <setmac:siteRef name="Theoretical Computer Science Meta" />
+      <setmac:siteRef name="Unix and Linux Meta" />
+      <setmac:siteRef name="Web Applications Meta" />
+      <setmac:siteRef name="Webmasters Meta" />
+      <setmac:siteRef name="WordPress Meta" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MostNonMetaSites">
+      <setmac:siteRef name="Android Enthusiasts" />
+      <setmac:siteRef name="Apple" />
+      <setmac:siteRef name="Ask Ubuntu" />
+      <setmac:siteRef name="Bicycles" />
+      <setmac:siteRef name="Cooking" />
+      <setmac:siteRef name="Database Administrators" />
+      <setmac:siteRef name="Drupal Answers" />
+      <setmac:siteRef name="Electrical Engineering" />
+      <setmac:siteRef name="English Language and Usage" />
+      <setmac:siteRef name="Game Development" />
+      <setmac:siteRef name="Gaming" />
+      <setmac:siteRef name="GIS" />
+      <setmac:siteRef name="Home Improvement" />
+      <setmac:siteRef name="IT Security" />
+      <setmac:siteRef name="Mathematics" />
+      <setmac:siteRef name="Photography" />
+      <setmac:siteRef name="Physics" />
+      <setmac:siteRef name="Programmers" />
+      <setmac:siteRef name="Server Fault" />
+      <setmac:siteRef name="Stack Apps" />
+      <setmac:siteRef name="Statistical Analysis" />
+      <setmac:siteRef name="Super User" />
+      <setmac:siteRef name="TeX - LaTeX" />
+      <setmac:siteRef name="Theoretical Computer Science" />
+      <setmac:siteRef name="Unix and Linux" />
+      <setmac:siteRef name="Web Applications" />
+      <setmac:siteRef name="Webmasters" />
+      <setmac:siteRef name="WordPress" />
+    </setmac:dataSet>
+
+    <setmac:dataSet name="MostSites">
+      <setmac:siteRef name="Android Enthusiasts Meta" />
+      <setmac:siteRef name="Android Enthusiasts" />
+      <setmac:siteRef name="Apple Meta" />
+      <setmac:siteRef name="Apple" />
+      <setmac:siteRef name="Ask Ubuntu Meta" />
+      <setmac:siteRef name="Ask Ubuntu" />
+      <setmac:siteRef name="Bicycles Meta" />
+      <setmac:siteRef name="Bicycles" />
+      <setmac:siteRef name="Cooking Meta" />
+      <setmac:siteRef name="Cooking" />
+      <setmac:siteRef name="Database Administrators Meta" />
+      <setmac:siteRef name="Database Administrators" />
+      <setmac:siteRef name="Drupal Answers Meta" />
+      <setmac:siteRef name="Drupal Answers" />
+      <setmac:siteRef name="Electrical Engineering Meta" />
+      <setmac:siteRef name="Electrical Engineering" />
+      <setmac:siteRef name="English Language and Usage Meta" />
+      <setmac:siteRef name="English Language and Usage" />
+      <setmac:siteRef name="Game Development Meta" />
+      <setmac:siteRef name="Game Development" />
+      <setmac:siteRef name="Gaming Meta" />
+      <setmac:siteRef name="Gaming" />
+      <setmac:siteRef name="GIS Meta" />
+      <setmac:siteRef name="GIS" />
+      <setmac:siteRef name="Home Improvement Meta" />
+      <setmac:siteRef name="Home Improvement" />
+      <setmac:siteRef name="IT Security Meta" />
+      <setmac:siteRef name="IT Security" />
+      <setmac:siteRef name="Mathematics Meta" />
+      <setmac:siteRef name="Mathematics" />
+      <setmac:siteRef name="Meta Server Fault" />
+      <setmac:siteRef name="Meta Stack Overflow" />
+      <setmac:siteRef name="Meta Super User" />
+      <setmac:siteRef name="Photography Meta" />
+      <setmac:siteRef name="Photography" />
+      <setmac:siteRef name="Physics Meta" />
+      <setmac:siteRef name="Physics" />
+      <setmac:siteRef name="Programmers Meta" />
+      <setmac:siteRef name="Programmers" />
+      <setmac:siteRef name="Server Fault" />
+      <setmac:siteRef name="Stack Apps" />
+      <setmac:siteRef name="Statistical Analysis Meta" />
+      <setmac:siteRef name="Statistical Analysis" />
+      <setmac:siteRef name="Super User" />
+      <setmac:siteRef name="TeX - LaTeX Meta" />
+      <setmac:siteRef name="TeX - LaTeX" />
+      <setmac:siteRef name="Theoretical Computer Science Meta" />
+      <setmac:siteRef name="Theoretical Computer Science" />
+      <setmac:siteRef name="Unix and Linux Meta" />
+      <setmac:siteRef name="Unix and Linux" />
+      <setmac:siteRef name="Web Applications Meta" />
+      <setmac:siteRef name="Web Applications" />
+      <setmac:siteRef name="Webmasters Meta" />
+      <setmac:siteRef name="Webmasters" />
+      <setmac:siteRef name="WordPress Meta" />
+      <setmac:siteRef name="WordPress" />
+    </setmac:dataSet>
+  </dataSets>
+  
+  <docTypes>
+    <setmac:flagged
+      name="QuestionOnly"
+      labelPropertyKey="State"
+      includeAnswers="false"
+      includeQuestionComments="false"
+      includeAnswerComments="false" />
+    <setmac:flagged
+      name="QuestionAndAnswers"
+      labelPropertyKey="State"
+      includeAnswers="true"
+      includeQuestionComments="false"
+      includeAnswerComments="false" />
+    <setmac:flagged
+      name="QuestionAndAnswersAndComments"
+      labelPropertyKey="State"
+      includeAnswers="true"
+      includeQuestionComments="true"
+      includeAnswerComments="true" />
+  </docTypes>
+  
+  <classifiers>
+    <classifier
+      name="NaiveBayes"
+      type="uk.ac.ed.inf.setmac.classifiers.NaiveBayes" />
+    <setmac:lda name="LDA" />
+    <setmac:dmr name="DMR" />
+    <setmac:simpleLda name="SimpleLDA" enabled="false" />
+    <setmac:ldaSvm name="LdaSvm" />
+  </classifiers>
+  
+  <tasks>
+    <binaryIntegerTask
+      name="OffTopic"
+      labelPropertyKey="State"
+      trueLabel="1" />
+    <binaryIntegerTask
+      name="NotConstructive"
+      labelPropertyKey="State"
+      trueLabel="2" />
+    <binaryIntegerTask
+      name="NotARealQuestion"
+      labelPropertyKey="State"
+      trueLabel="3" />
+    <binaryIntegerTask
+      name="TooLocalized"
+      labelPropertyKey="State"
+      trueLabel="4" />
+    <multiClassIntegerTask
+      name="MultiClass"
+      labelPropertyKey="State"
+      labels="0 1 2 3 4" />
+  </tasks>
+  
+  <preCacheProcessors>
+    <processor
+      name="ExtractHtmlContent"
+      code="EHC"
+      type="uk.ac.ed.inf.ace.processors.ExtractHtmlContent" />
+    <tokenizer
+      name="Tokenizer"
+      code="TOK"
+      pattern="[^\w']" />
+    <processor
+      name="CleanTokens"
+      code="CTK"
+      type="uk.ac.ed.inf.ace.processors.CleanTokens" />
+    <processor
+      name="TokensToLower"
+      code="TTL"
+      type="uk.ac.ed.inf.ace.processors.TokensToLower" />
+    <removeStopwords
+      name="RemoveStopwords"
+      code="RSW"
+      pathname="..\mallet-2.0.7\stoplists\en.txt" />
+    <processor
+      name="CompressByDictionary"
+      code="TTL"
+      type="uk.ac.ed.inf.ace.processors.CompressByDictionary" />
+  </preCacheProcessors>
+  
+  <postCacheProcessors>
+    <filterByLabel name="FilterByLabel" code="FBL" labelPropertyKey="State">
+      <rule label="0" sampleProbability="0.1" />
+    </filterByLabel>
+  </postCacheProcessors>
+  
+  <programmes>
+    <programme name="Baseline" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifier
+          name="Randomifier"
+          type="uk.ac.ed.inf.setmac.classifiers.Randomifier" />
+      </classifiers>
+      <postCacheProcessors />
+    </programme>
+    <programme name="FixedLDA">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <setmac:lda name="LDA-LTR-MD" instanceModelDistanceType="LeftToRight" classifierType="MinimumDistance" />
+        <setmac:lda name="LDA-LTR-GD" instanceModelDistanceType="LeftToRight" classifierType="GaussianDistance" enabled="false" />
+        <setmac:lda name="LDA-MT-MD" instanceModelDistanceType="MeanTopics" classifierType="MinimumDistance" enabled="false" />
+        <setmac:lda name="LDA-MT-GD" instanceModelDistanceType="MeanTopics" classifierType="GaussianDistance" enabled="false" />
+      </classifiers>
+    </programme>
+    <programme name="NaiveBayes" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+      <postCacheProcessors />
+    </programme>
+    <programme name="EqualiseClasses" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="NoCrossValidation" crossValidationFolds="1" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="10FoldCrossValidation" crossValidationFolds="10" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="Seed2" randomSeed="2" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="Seed3" randomSeed="3" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="TooLocalizedWithStopwords" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+      <tasks>
+        <taskRef name="TooLocalized" />
+      </tasks>
+      <preCacheProcessors>
+        <processor
+          name="ExtractHtmlContent"
+          code="EHC"
+          type="uk.ac.ed.inf.ace.processors.ExtractHtmlContent" />
+        <tokenizer
+          name="Tokenizer"
+          code="TOK"
+          pattern="[^\w']" />
+        <processor
+          name="CleanTokens"
+          code="CTK"
+          type="uk.ac.ed.inf.ace.processors.CleanTokens" />
+        <processor
+          name="TokensToLower"
+          code="TTL"
+          type="uk.ac.ed.inf.ace.processors.TokensToLower" />
+      </preCacheProcessors>
+    </programme>
+    <programme name="RicherTraining" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="MostSites" enabled="false">
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+    </programme>
+    <programme name="StackOverflow" enabled="false">
+      <dataSets>
+        <setmac:dataSet name="StackOverflow">
+          <setmac:siteRef name="Stack Overflow" />
+        </setmac:dataSet>
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="NaiveBayes" />
+      </classifiers>
+      <postCacheProcessors>
+        <filterByLabel name="FilterByLabel" code="FBL" labelPropertyKey="State">
+          <rule label="0" sampleProbability="0.01" />
+        </filterByLabel>
+      </postCacheProcessors>
+    </programme>
+    <programme name="LDA" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <setmac:lda name="LDA" />
+        <setmac:lda name="LDA-5t" numTopics="5" />
+        <setmac:lda name="LDA-20t" numTopics="20" />
+        <setmac:lda name="LDA-100t" numTopics="100" />
+        <setmac:lda name="LDA-200t" numTopics="200" />
+        <setmac:lda name="LDA-400t" numTopics="400" />
+        <setmac:lda name="LDA-800t" numTopics="800" />
+        <setmac:lda name="LDA-1i" numIterations="1" />
+        <setmac:lda name="LDA-5i" numIterations="5" />
+        <setmac:lda name="LDA-10i" numIterations="10" />
+        <setmac:lda name="LDA-50i" numIterations="50" />
+        <setmac:lda name="LDA-100i" numIterations="100" />
+        <setmac:lda name="LDA-500i" numIterations="500" />
+        <setmac:lda name="LDA-2000i" numIterations="2000" />
+        <setmac:lda name="LDA-10000i" numIterations="10000" />
+        <setmac:lda name="LDA-100a" alpha="100" />
+        <setmac:lda name="LDA-10a" alpha="10" />
+        <setmac:lda name="LDA-5a" alpha="5" />
+        <setmac:lda name="LDA-1a" alpha="1" />
+        <setmac:lda name="LDA-0.5a" alpha="0.5" />
+        <setmac:lda name="LDA-0.1a" alpha="0.1" />
+        <setmac:lda name="LDA-100b" beta="100" />
+        <setmac:lda name="LDA-50b" beta="50" />
+        <setmac:lda name="LDA-10b" beta="10" />
+        <setmac:lda name="LDA-5b" beta="5" />
+        <setmac:lda name="LDA-1b" beta="1" />
+        <setmac:lda name="LDA-0.5b" beta="0.5" />
+        <setmac:lda name="LDA-0.1b" beta="0.1" />
+        <setmac:lda name="LDA-0.05b" beta="0.05" />
+        <setmac:lda name="LDA-0.005b" beta="0.005" />
+        <setmac:lda name="LDA-0.001b" beta="0.001" />
+        <setmac:lda name="LDA-LTR-GD" instanceModelDistanceType="LeftToRight" classifierType="GaussianDistance" />
+        <setmac:lda name="LDA-MT-MD" instanceModelDistanceType="MeanTopics" classifierType="MinimumDistance" />
+        <setmac:lda name="LDA-MT-GD" instanceModelDistanceType="MeanTopics" classifierType="GaussianDistance" />
+      </classifiers>
+    </programme>
+    <programme name="LdaSvm" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <setmac:ldaSvm name="LdaSvm" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc" svmType="NuSvc" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.01" svmType="NuSvc" svmNu="0.01" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.05" svmType="NuSvc" svmNu="0.05" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.1" svmType="NuSvc" svmNu="0.1" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.2" svmType="NuSvc" svmNu="0.2" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.3" svmType="NuSvc" svmNu="0.3" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.4" svmType="NuSvc" svmNu="0.4" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.6" svmType="NuSvc" svmNu="0.6" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.7" svmType="NuSvc" svmNu="0.7" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.8" svmType="NuSvc" svmNu="0.8" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.9" svmType="NuSvc" svmNu="0.9" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.95" svmType="NuSvc" svmNu="0.95" />
+        <setmac:ldaSvm name="LdaSvm-NuSvc-n0.99" svmType="NuSvc" svmNu="0.99" />
+        <setmac:ldaSvm name="LdaSvm-Linear" svmKernelType="Linear" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d2" svmKernelType="Polynomial" svmDegree="2" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d4" svmKernelType="Polynomial" svmDegree="4" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d5" svmKernelType="Polynomial" svmDegree="5" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d6" svmKernelType="Polynomial" svmDegree="6" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d7" svmKernelType="Polynomial" svmDegree="7" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d8" svmKernelType="Polynomial" svmDegree="8" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d16" svmKernelType="Polynomial" svmDegree="16" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d32" svmKernelType="Polynomial" svmDegree="32" />
+        <setmac:ldaSvm name="LdaSvm-Poly-d64" svmKernelType="Polynomial" svmDegree="64" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.0001" svmKernelType="Polynomial" svmGamma="0.0001" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.0002" svmKernelType="Polynomial" svmGamma="0.0002" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.0004" svmKernelType="Polynomial" svmGamma="0.0004" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.001" svmKernelType="Polynomial" svmGamma="0.001" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.002" svmKernelType="Polynomial" svmGamma="0.002" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.004" svmKernelType="Polynomial" svmGamma="0.004" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.01" svmKernelType="Polynomial" svmGamma="0.01" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.02" svmKernelType="Polynomial" svmGamma="0.02" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.04" svmKernelType="Polynomial" svmGamma="0.04" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.1" svmKernelType="Polynomial" svmGamma="0.1" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.2" svmKernelType="Polynomial" svmGamma="0.2" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g0.4" svmKernelType="Polynomial" svmGamma="0.4" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g1" svmKernelType="Polynomial" svmGamma="1.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g2" svmKernelType="Polynomial" svmGamma="2.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g4" svmKernelType="Polynomial" svmGamma="4.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g10" svmKernelType="Polynomial" svmGamma="10.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g20" svmKernelType="Polynomial" svmGamma="20.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-g40" svmKernelType="Polynomial" svmGamma="40.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.0001" svmKernelType="Polynomial" svmCoef0="0.0001" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.0002" svmKernelType="Polynomial" svmCoef0="0.0002" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.0004" svmKernelType="Polynomial" svmCoef0="0.0004" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.001" svmKernelType="Polynomial" svmCoef0="0.001" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.002" svmKernelType="Polynomial" svmCoef0="0.002" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.004" svmKernelType="Polynomial" svmCoef0="0.004" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.01" svmKernelType="Polynomial" svmCoef0="0.01" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.02" svmKernelType="Polynomial" svmCoef0="0.02" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.04" svmKernelType="Polynomial" svmCoef0="0.04" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.1" svmKernelType="Polynomial" svmCoef0="0.1" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.2" svmKernelType="Polynomial" svmCoef0="0.2" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r0.4" svmKernelType="Polynomial" svmCoef0="0.4" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r1" svmKernelType="Polynomial" svmCoef0="1.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r2" svmKernelType="Polynomial" svmCoef0="2.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r4" svmKernelType="Polynomial" svmCoef0="4.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r10" svmKernelType="Polynomial" svmCoef0="10.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r20" svmKernelType="Polynomial" svmCoef0="20.0" />
+        <setmac:ldaSvm name="LdaSvm-Poly-r40" svmKernelType="Polynomial" svmCoef0="40.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF" svmKernelType="RBF" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.0001" svmKernelType="RBF" svmGamma="0.0001" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.0002" svmKernelType="RBF" svmGamma="0.0002" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.0004" svmKernelType="RBF" svmGamma="0.0004" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.001" svmKernelType="RBF" svmGamma="0.001" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.002" svmKernelType="RBF" svmGamma="0.002" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.004" svmKernelType="RBF" svmGamma="0.004" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.01" svmKernelType="RBF" svmGamma="0.01" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.02" svmKernelType="RBF" svmGamma="0.02" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.04" svmKernelType="RBF" svmGamma="0.04" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.1" svmKernelType="RBF" svmGamma="0.1" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.2" svmKernelType="RBF" svmGamma="0.2" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g0.4" svmKernelType="RBF" svmGamma="0.4" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g1" svmKernelType="RBF" svmGamma="1.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g2" svmKernelType="RBF" svmGamma="2.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g4" svmKernelType="RBF" svmGamma="4.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g10" svmKernelType="RBF" svmGamma="10.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g20" svmKernelType="RBF" svmGamma="20.0" />
+        <setmac:ldaSvm name="LdaSvm-RBF-g40" svmKernelType="RBF" svmGamma="40.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid" svmKernelType="Sigmoid" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.0001" svmKernelType="Sigmoid" svmGamma="0.0001" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.0002" svmKernelType="Sigmoid" svmGamma="0.0002" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.0004" svmKernelType="Sigmoid" svmGamma="0.0004" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.001" svmKernelType="Sigmoid" svmGamma="0.001" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.002" svmKernelType="Sigmoid" svmGamma="0.002" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.004" svmKernelType="Sigmoid" svmGamma="0.004" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.01" svmKernelType="Sigmoid" svmGamma="0.01" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.02" svmKernelType="Sigmoid" svmGamma="0.02" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.04" svmKernelType="Sigmoid" svmGamma="0.04" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.1" svmKernelType="Sigmoid" svmGamma="0.1" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.2" svmKernelType="Sigmoid" svmGamma="0.2" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g0.4" svmKernelType="Sigmoid" svmGamma="0.4" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g1" svmKernelType="Sigmoid" svmGamma="1.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g2" svmKernelType="Sigmoid" svmGamma="2.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g4" svmKernelType="Sigmoid" svmGamma="4.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g10" svmKernelType="Sigmoid" svmGamma="10.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g20" svmKernelType="Sigmoid" svmGamma="20.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-g40" svmKernelType="Sigmoid" svmGamma="40.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.0001" svmKernelType="Sigmoid" svmCoef0="0.0001" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.0002" svmKernelType="Sigmoid" svmCoef0="0.0002" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.0004" svmKernelType="Sigmoid" svmCoef0="0.0004" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.001" svmKernelType="Sigmoid" svmCoef0="0.001" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.002" svmKernelType="Sigmoid" svmCoef0="0.002" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.004" svmKernelType="Sigmoid" svmCoef0="0.004" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.01" svmKernelType="Sigmoid" svmCoef0="0.01" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.02" svmKernelType="Sigmoid" svmCoef0="0.02" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.04" svmKernelType="Sigmoid" svmCoef0="0.04" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.1" svmKernelType="Sigmoid" svmCoef0="0.1" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.2" svmKernelType="Sigmoid" svmCoef0="0.2" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r0.4" svmKernelType="Sigmoid" svmCoef0="0.4" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r1" svmKernelType="Sigmoid" svmCoef0="1.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r2" svmKernelType="Sigmoid" svmCoef0="2.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r4" svmKernelType="Sigmoid" svmCoef0="4.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r10" svmKernelType="Sigmoid" svmCoef0="10.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r20" svmKernelType="Sigmoid" svmCoef0="20.0" />
+        <setmac:ldaSvm name="LdaSvm-Sigmoid-r40" svmKernelType="Sigmoid" svmCoef0="40.0" />
+      </classifiers>
+    </programme>
+    <programme name="DMR" enabled="false">
+      <dataSets>
+        <dataSetRef name="Programmers" />
+      </dataSets>
+      <docTypes>
+        <docTypeRef name="QuestionOnly" />
+      </docTypes>
+      <classifiers>
+        <classifierRef name="DMR" />
+      </classifiers>
+    </programme>
+    <programme name="Test" enabled="false">
+      <dataSets>
+        <dataSetRef name="Test" />
+      </dataSets>
+    </programme>
+  </programmes>
+
+  <setmac:sites>
+    <setmac:site name="Test" xmlPath="Test\" enabled="false" />
+    <setmac:site name="Android Enthusiasts Meta" xmlPath="092011 Android Enthusiasts Meta\" />
+    <setmac:site name="Android Enthusiasts" xmlPath="092011 Android Enthusiasts\" />
+    <setmac:site name="Apple Meta" xmlPath="092011 Apple Meta\" />
+    <setmac:site name="Apple" xmlPath="092011 Apple\" />
+    <setmac:site name="Ask Ubuntu Meta" xmlPath="092011 Ask Ubuntu Meta\" />
+    <setmac:site name="Ask Ubuntu" xmlPath="092011 Ask Ubuntu\" />
+    <setmac:site name="Bicycles Meta" xmlPath="092011 Bicycles Meta\" />
+    <setmac:site name="Bicycles" xmlPath="092011 Bicycles\" />
+    <setmac:site name="Cooking Meta" xmlPath="092011 Cooking Meta\" />
+    <setmac:site name="Cooking" xmlPath="092011 Cooking\" />
+    <setmac:site name="Database Administrators Meta" xmlPath="092011 Database Administrators Meta\" />
+    <setmac:site name="Database Administrators" xmlPath="092011 Database Administrators\" />
+    <setmac:site name="Drupal Answers Meta" xmlPath="092011 Drupal Answers Meta\" />
+    <setmac:site name="Drupal Answers" xmlPath="092011 Drupal Answers\" />
+    <setmac:site name="Electrical Engineering Meta" xmlPath="092011 Electrical Engineering Meta\" />
+    <setmac:site name="Electrical Engineering" xmlPath="092011 Electrical Engineering\" />
+    <setmac:site name="English Language and Usage Meta" xmlPath="092011 English Language and Usage Meta\" />
+    <setmac:site name="English Language and Usage" xmlPath="092011 English Language and Usage\" />
+    <setmac:site name="Game Development Meta" xmlPath="092011 Game Development Meta\" />
+    <setmac:site name="Game Development" xmlPath="092011 Game Development\" />
+    <setmac:site name="Gaming Meta" xmlPath="092011 Gaming Meta\" />
+    <setmac:site name="Gaming" xmlPath="092011 Gaming\" />
+    <setmac:site name="GIS Meta" xmlPath="092011 GIS Meta\" />
+    <setmac:site name="GIS" xmlPath="092011 GIS\" />
+    <setmac:site name="Home Improvement Meta" xmlPath="092011 Home Improvement Meta\" />
+    <setmac:site name="Home Improvement" xmlPath="092011 Home Improvement\" />
+    <setmac:site name="IT Security Meta" xmlPath="092011 IT Security Meta\" />
+    <setmac:site name="IT Security" xmlPath="092011 IT Security\" />
+    <setmac:site name="Mathematics Meta" xmlPath="092011 Mathematics Meta\" />
+    <setmac:site name="Mathematics" xmlPath="092011 Mathematics\" />
+    <setmac:site name="Meta Server Fault" xmlPath="092011 Meta Server Fault\" />
+    <setmac:site name="Meta Stack Overflow" xmlPath="092011 Meta Stack Overflow\" />
+    <setmac:site name="Meta Super User" xmlPath="092011 Meta Super User\" />
+    <setmac:site name="Photography Meta" xmlPath="092011 Photography Meta\" />
+    <setmac:site name="Photography" xmlPath="092011 Photography\" />
+    <setmac:site name="Physics Meta" xmlPath="092011 Physics Meta\" />
+    <setmac:site name="Physics" xmlPath="092011 Physics\" />
+    <setmac:site name="Programmers Meta" xmlPath="092011 Programmers Meta\" />
+    <setmac:site name="Programmers" xmlPath="092011 Programmers\" />
+    <setmac:site name="Server Fault" xmlPath="092011 Server Fault\" />
+    <setmac:site name="Stack Apps" xmlPath="092011 Stack Apps\" />
+    <setmac:site name="Stack Overflow" xmlPath="092011 Stack Overflow\" />
+    <setmac:site name="Statistical Analysis Meta" xmlPath="092011 Statistical Analysis Meta\" />
+    <setmac:site name="Statistical Analysis" xmlPath="092011 Statistical Analysis\" />
+    <setmac:site name="Super User" xmlPath="092011 Super User\" />
+    <setmac:site name="TeX - LaTeX Meta" xmlPath="092011 TeX - LaTeX Meta\" />
+    <setmac:site name="TeX - LaTeX" xmlPath="092011 TeX - LaTeX\" />
+    <setmac:site name="Theoretical Computer Science Meta" xmlPath="092011 Theoretical Computer Science Meta\" />
+    <setmac:site name="Theoretical Computer Science" xmlPath="092011 Theoretical Computer Science\" />
+    <setmac:site name="Unix and Linux Meta" xmlPath="092011 Unix and Linux Meta\" />
+    <setmac:site name="Unix and Linux" xmlPath="092011 Unix and Linux\" />
+    <setmac:site name="Web Applications Meta" xmlPath="092011 Web Applications Meta\" />
+    <setmac:site name="Web Applications" xmlPath="092011 Web Applications\" />
+    <setmac:site name="Webmasters Meta" xmlPath="092011 Webmasters Meta\" />
+    <setmac:site name="Webmasters" xmlPath="092011 Webmasters\" />
+    <setmac:site name="WordPress Meta" xmlPath="092011 WordPress Meta\" />
+    <setmac:site name="WordPress" xmlPath="092011 WordPress\" />
+  </setmac:sites>
+</setmac:engine>
